@@ -135,7 +135,7 @@ namespace WebpConverter
                     }
                 }).Distinct().Where(x =>
                 {
-                    return filterExtensions.Contains(Path.GetExtension(x).TrimStart('.'));
+                    return filterExtensions.Contains(Path.GetExtension(x).TrimStart('.').ToLower());
                 }).Except(listView.Items.Cast<ListViewItem>().Select(x => x.Text));
                 if (files == null)
                 {
