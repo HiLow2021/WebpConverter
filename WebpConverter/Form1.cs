@@ -222,9 +222,28 @@ namespace WebpConverter
 
         private void EnableControls(bool flag)
         {
-            modeToolStripMenuItem.Checked = flag;
-            toolToolStripMenuItem.Checked = flag;
+            modeToolStripMenuItem.Enabled = flag;
+            toolToolStripMenuItem.Enabled = flag;
+            listView1.AllowDrop = flag;
+            listView2.AllowDrop = flag;
+            comboBox1.Enabled = flag;
+            comboBox2.Enabled = flag;
+            numericUpDown1.Enabled = flag;
+            numericUpDown2.Enabled = flag;
+            checkBox1.Enabled = flag;
+            checkBox2.Enabled = flag;
+            checkBox3.Enabled = flag;
+            checkBox4.Enabled = flag;
+            checkBox5.Enabled = flag;
+            checkBox6.Enabled = flag;
+            checkBox7.Enabled = flag;
+            button1.Enabled = flag;
+            button2.Enabled = flag;
+            button3.Enabled = flag;
             button4.Enabled = flag;
+            button5.Enabled = flag;
+            button6.Enabled = flag;
+            button7.Enabled = flag;
             button8.Enabled = flag;
         }
 
