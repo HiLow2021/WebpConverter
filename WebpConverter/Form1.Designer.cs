@@ -57,9 +57,8 @@
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -209,13 +208,11 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Checked = true;
-            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox3.Location = new System.Drawing.Point(16, 72);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(169, 19);
+            this.checkBox3.Size = new System.Drawing.Size(139, 19);
             this.checkBox3.TabIndex = 10;
-            this.checkBox3.Text = "保存ディレクトリ (out) を生成";
+            this.checkBox3.Text = "Lossless モードで実行";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // checkBox1
@@ -385,25 +382,24 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.checkBox7);
-            this.groupBox2.Controls.Add(this.checkBox5);
             this.groupBox2.Controls.Add(this.checkBox6);
+            this.groupBox2.Controls.Add(this.checkBox5);
             this.groupBox2.Location = new System.Drawing.Point(471, 74);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(193, 103);
+            this.groupBox2.Size = new System.Drawing.Size(193, 78);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "オプション";
             // 
-            // checkBox7
+            // checkBox6
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(16, 72);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(147, 19);
-            this.checkBox7.TabIndex = 10;
-            this.checkBox7.Text = "デコードしたファイルを削除";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(16, 47);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(147, 19);
+            this.checkBox6.TabIndex = 10;
+            this.checkBox6.Text = "デコードしたファイルを削除";
+            this.checkBox6.UseVisualStyleBackColor = true;
             // 
             // checkBox5
             // 
@@ -416,18 +412,6 @@
             this.checkBox5.TabIndex = 6;
             this.checkBox5.Text = "メタデータを保存";
             this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Checked = true;
-            this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox6.Location = new System.Drawing.Point(16, 47);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(169, 19);
-            this.checkBox6.TabIndex = 8;
-            this.checkBox6.Text = "保存ディレクトリ (out) を生成";
-            this.checkBox6.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -627,7 +611,6 @@
         private Label label4;
         private NumericUpDown numericUpDown2;
         private GroupBox groupBox2;
-        private CheckBox checkBox7;
         private CheckBox checkBox5;
         private CheckBox checkBox6;
         private OpenFileDialog openFileDialog1;

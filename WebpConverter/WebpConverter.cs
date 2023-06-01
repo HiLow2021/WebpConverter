@@ -17,10 +17,10 @@ namespace WebpConverter
     {
         public static async Task EncodeAsync(string path, string destinationDirectory)
         {
-            await EncodeAsync(path, destinationDirectory, WebpEncodingMethod.Default, 75, 60, false, true);
+            await EncodeAsync(path, destinationDirectory, WebpEncodingMethod.Default, 75, 60, false, true, false);
         }
 
-        public static async Task EncodeAsync(string path, string destinationDirectory, WebpEncodingMethod method, int quality, int filterStrength, bool skipMetadata, bool useAlphaCompression)
+        public static async Task EncodeAsync(string path, string destinationDirectory, WebpEncodingMethod method, int quality, int filterStrength, bool skipMetadata, bool useAlphaCompression, bool nearLossless)
         {
             if (!File.Exists(path) || !Directory.Exists(destinationDirectory))
             {
@@ -40,7 +40,8 @@ namespace WebpConverter
                 Quality = quality,
                 FilterStrength = filterStrength,
                 SkipMetadata = skipMetadata,
-                UseAlphaCompression = useAlphaCompression
+                UseAlphaCompression = useAlphaCompression,
+                NearLossless = nearLossless
             };
 
             await image.SaveAsWebpAsync(destinationPath, encoder);

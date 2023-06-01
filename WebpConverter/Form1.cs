@@ -48,11 +48,12 @@ namespace WebpConverter
                     var filterStrength = 60;
                     var skipMetadata = !checkBox1.Checked;
                     var useAlpha = checkBox2.Checked;
-                    var useOutputDirectory = checkBox3.Checked;
+                    var useLossless = checkBox3.Checked;
                     var isDeleteFile = checkBox4.Checked;
-                    var option = new { method, quality, filterStrength, skipMetadata, useAlpha, useOutputDirectory, isDeleteFile };
+                    var option = new { method, quality, filterStrength, skipMetadata, useAlpha, useLossless, isDeleteFile };
 
                     await Execute(new Func<Task>(async () => await EncodeAsync(paths, option)));
+                    MessageBox.Show("èàóùÇ™äÆóπÇµÇ‹ÇµÇΩ", "ê¨å˜");
                 }
                 catch (Exception ex)
                 {
@@ -70,11 +71,11 @@ namespace WebpConverter
                     var type = (DecodingType)comboBox2.SelectedIndex;
                     var jpegQuality = (int)numericUpDown2.Value;
                     var skipMetadata = !checkBox5.Checked;
-                    var useOutputDirectory = checkBox6.Checked;
-                    var isDeleteFile = checkBox7.Checked;
-                    var option = new { type, jpegQuality, skipMetadata, useOutputDirectory, isDeleteFile };
+                    var isDeleteFile = checkBox6.Checked;
+                    var option = new { type, jpegQuality, skipMetadata, isDeleteFile };
 
                     await Execute(new Func<Task>(async () => await DecodeAsync(paths, option)));
+                    MessageBox.Show("èàóùÇ™äÆóπÇµÇ‹ÇµÇΩ", "ê¨å˜");
                 }
                 catch (Exception ex)
                 {
@@ -127,7 +128,9 @@ namespace WebpConverter
                     }
                     else if (Directory.Exists(x))
                     {
-                        return Directory.GetFiles(x, "*", SearchOption.TopDirectoryOnly);
+                        var searchOption = _settings.IsIncludingSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+
+                        return Directory.GetFiles(x, "*", searchOption);
                     }
                     else
                     {
@@ -166,9 +169,10 @@ namespace WebpConverter
                 var i = 0;
                 await Parallel.ForEachAsync(paths, async (x, token) =>
                 {
-                    var directory = GetAndCreateOutputDirectory(x, option.useOutputDirectory);
+                    var destinationDirectory = GetDestinationDirectory(x);
 
-                    await WebpConverter.EncodeAsync(x, directory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha);
+                    CreateDirectory(destinationDirectory);
+                    await WebpConverter.EncodeAsync(x, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
                     DeleteFile(x, option.isDeleteFile);
                     UpdateProgress(progressBar1, paths.Length, ++i);
                 });
@@ -177,9 +181,10 @@ namespace WebpConverter
             {
                 foreach (var (item, i) in paths.Select((x, i) => (x, i)))
                 {
-                    var directory = GetAndCreateOutputDirectory(item, option.useOutputDirectory);
+                    var destinationDirectory = GetDestinationDirectory(item);
 
-                    await WebpConverter.EncodeAsync(item, directory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha);
+                    CreateDirectory(destinationDirectory);
+                    await WebpConverter.EncodeAsync(item, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
                     DeleteFile(item, option.isDeleteFile);
                     UpdateProgress(progressBar1, paths.Length, i + 1);
                 }
@@ -193,9 +198,10 @@ namespace WebpConverter
                 var i = 0;
                 await Parallel.ForEachAsync(paths, async (x, token) =>
                 {
-                    var directory = GetAndCreateOutputDirectory(x, option.useOutputDirectory);
+                    var destinationDirectory = GetDestinationDirectory(x);
 
-                    await WebpConverter.DecodeAsync(x, directory, option.type, option.jpegQuality, option.skipMetadata);
+                    CreateDirectory(destinationDirectory);
+                    await WebpConverter.DecodeAsync(x, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
                     DeleteFile(x, option.isDeleteFile);
                     UpdateProgress(progressBar2, paths.Length, ++i);
                 });
@@ -204,9 +210,10 @@ namespace WebpConverter
             {
                 foreach (var (item, i) in paths.Select((x, i) => (x, i)))
                 {
-                    var directory = GetAndCreateOutputDirectory(item, option.useOutputDirectory);
+                    var destinationDirectory = GetDestinationDirectory(item);
 
-                    await WebpConverter.DecodeAsync(item, directory, option.type, option.jpegQuality, option.skipMetadata);
+                    CreateDirectory(destinationDirectory);
+                    await WebpConverter.DecodeAsync(item, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
                     DeleteFile(item, option.isDeleteFile);
                     UpdateProgress(progressBar2, paths.Length, i + 1);
                 }
@@ -236,7 +243,6 @@ namespace WebpConverter
             checkBox4.Enabled = flag;
             checkBox5.Enabled = flag;
             checkBox6.Enabled = flag;
-            checkBox7.Enabled = flag;
             button1.Enabled = flag;
             button2.Enabled = flag;
             button3.Enabled = flag;
@@ -281,22 +287,27 @@ namespace WebpConverter
             }));
         }
 
-        private static string GetAndCreateOutputDirectory(string path, bool useOutputDirectory)
+        private string GetDestinationDirectory(string path)
         {
-            if (useOutputDirectory)
+            if (_settings.SaveDirectoryType == SaveDirectoryType.Same)
             {
-                var outputDirectory = Path.GetDirectoryName(path) + Path.DirectorySeparatorChar + "out";
-
-                if (!Directory.Exists(outputDirectory))
-                {
-                    Directory.CreateDirectory(outputDirectory);
-                }
-
-                return outputDirectory;
+                return Path.GetDirectoryName(path) ?? string.Empty;
+            }
+            else if (_settings.SaveDirectoryType == SaveDirectoryType.Sub)
+            {
+                return Path.GetDirectoryName(path) + Path.DirectorySeparatorChar + "out";
             }
             else
             {
-                return Path.GetDirectoryName(path) ?? string.Empty;
+                return _settings.SaveDirectory + Path.DirectorySeparatorChar + Path.GetFileName(Path.GetDirectoryName(path));
+            }
+        }
+
+        private static void CreateDirectory(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
             }
         }
 
@@ -328,14 +339,13 @@ namespace WebpConverter
             numericUpDown1.Value = _settings.EncodingQuality;
             checkBox1.Checked = _settings.EncodingSaveMetadata;
             checkBox2.Checked = _settings.EncodingSaveAlpha;
-            checkBox3.Checked = _settings.EncodingSaveDirectory;
+            checkBox3.Checked = _settings.EncodingLosslessMode;
             checkBox4.Checked = _settings.EncodingDeleteFile;
 
             comboBox2.SelectedIndex = (int)_settings.DecodingType;
             numericUpDown2.Value = _settings.DecodingJpegQuality;
             checkBox5.Checked = _settings.DecodingSaveMetadata;
-            checkBox6.Checked = _settings.DecodingSaveDirectory;
-            checkBox7.Checked = _settings.DecodingDeleteFile;
+            checkBox6.Checked = _settings.DecodingDeleteFile;
         }
 
         private void SaveSettings()
@@ -352,14 +362,13 @@ namespace WebpConverter
             _settings.EncodingQuality = (int)numericUpDown1.Value;
             _settings.EncodingSaveMetadata = checkBox1.Checked;
             _settings.EncodingSaveAlpha = checkBox2.Checked;
-            _settings.EncodingSaveDirectory = checkBox3.Checked;
+            _settings.EncodingLosslessMode = checkBox3.Checked;
             _settings.EncodingDeleteFile = checkBox4.Checked;
 
             _settings.DecodingType = (DecodingType)comboBox2.SelectedIndex;
             _settings.DecodingJpegQuality = (int)numericUpDown2.Value;
             _settings.DecodingSaveMetadata = checkBox5.Checked;
-            _settings.DecodingSaveDirectory = checkBox6.Checked;
-            _settings.DecodingDeleteFile = checkBox7.Checked;
+            _settings.DecodingDeleteFile = checkBox6.Checked;
 
             _settings.Save();
         }
