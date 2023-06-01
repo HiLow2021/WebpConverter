@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace WebpConverter
+namespace WebpConverter.Data
 {
     public class MyAppSettings
     {

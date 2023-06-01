@@ -11,16 +11,16 @@ using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Formats.Webp;
 using Image = SixLabors.ImageSharp.Image;
 
-namespace WebpConverter
+namespace WebpConverter.Data
 {
-    public static class WebpConverter
+    public class WebpConverter
     {
-        public static async Task EncodeAsync(string path, string destinationDirectory)
+        public async Task EncodeAsync(string path, string destinationDirectory)
         {
             await EncodeAsync(path, destinationDirectory, WebpEncodingMethod.Default, 75, 60, false, true, false);
         }
 
-        public static async Task EncodeAsync(string path, string destinationDirectory, WebpEncodingMethod method, int quality, int filterStrength, bool skipMetadata, bool useAlphaCompression, bool nearLossless)
+        public async Task EncodeAsync(string path, string destinationDirectory, WebpEncodingMethod method, int quality, int filterStrength, bool skipMetadata, bool useAlphaCompression, bool nearLossless)
         {
             if (!File.Exists(path) || !Directory.Exists(destinationDirectory))
             {
@@ -47,12 +47,12 @@ namespace WebpConverter
             await image.SaveAsWebpAsync(destinationPath, encoder);
         }
 
-        public static async Task DecodeAsync(string path, string destinationDirectory)
+        public async Task DecodeAsync(string path, string destinationDirectory)
         {
             await DecodeAsync(path, destinationDirectory, DecodingType.Png, 75, false);
         }
 
-        public static async Task DecodeAsync(string path, string destinationDirectory, DecodingType type, int jpegQuality, bool skipMetadata)
+        public async Task DecodeAsync(string path, string destinationDirectory, DecodingType type, int jpegQuality, bool skipMetadata)
         {
             if (!File.Exists(path) || !Directory.Exists(destinationDirectory))
             {

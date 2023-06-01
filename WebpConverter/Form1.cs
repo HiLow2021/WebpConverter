@@ -1,9 +1,11 @@
 using SixLabors.ImageSharp.Formats.Webp;
+using WebpConverter.Data;
 
 namespace WebpConverter
 {
     public partial class Form1 : Form
     {
+        private readonly Data.WebpConverter _converter = new();
         private readonly MyAppSettings _settings = new();
         private bool _isRunning;
 
@@ -172,7 +174,7 @@ namespace WebpConverter
                     var destinationDirectory = GetDestinationDirectory(x);
 
                     CreateDirectory(destinationDirectory);
-                    await WebpConverter.EncodeAsync(x, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
+                    await _converter.EncodeAsync(x, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
                     DeleteFile(x, option.isDeleteFile);
                     UpdateProgress(progressBar1, paths.Length, ++i);
                 });
@@ -184,7 +186,7 @@ namespace WebpConverter
                     var destinationDirectory = GetDestinationDirectory(item);
 
                     CreateDirectory(destinationDirectory);
-                    await WebpConverter.EncodeAsync(item, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
+                    await _converter.EncodeAsync(item, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
                     DeleteFile(item, option.isDeleteFile);
                     UpdateProgress(progressBar1, paths.Length, i + 1);
                 }
@@ -201,7 +203,7 @@ namespace WebpConverter
                     var destinationDirectory = GetDestinationDirectory(x);
 
                     CreateDirectory(destinationDirectory);
-                    await WebpConverter.DecodeAsync(x, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
+                    await _converter.DecodeAsync(x, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
                     DeleteFile(x, option.isDeleteFile);
                     UpdateProgress(progressBar2, paths.Length, ++i);
                 });
@@ -213,7 +215,7 @@ namespace WebpConverter
                     var destinationDirectory = GetDestinationDirectory(item);
 
                     CreateDirectory(destinationDirectory);
-                    await WebpConverter.DecodeAsync(item, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
+                    await _converter.DecodeAsync(item, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
                     DeleteFile(item, option.isDeleteFile);
                     UpdateProgress(progressBar2, paths.Length, i + 1);
                 }

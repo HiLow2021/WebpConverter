@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebpConverter
+namespace WebpConverter.Data
 {
-    public enum SaveDirectoryType
+    public enum DecodingType
     {
-        Same,
-        Sub,
-        Specified
+        Png,
+        Jpg,
+        Gif,
+        Bmp
     }
 }
