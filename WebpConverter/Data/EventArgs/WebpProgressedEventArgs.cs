@@ -17,7 +17,7 @@ namespace WebpConverter.Data.EventArgs
         public WebpProgressedEventArgs(int progress, int total)
         {
             Progress = progress;
-            ProgressPercentage = total == 0 ? 100 : (int)Math.Round(progress / (float)total * 100, 1, MidpointRounding.AwayFromZero);
+            ProgressPercentage = total == 0 ? 100 : (int)(progress / (float)total * 100);
             Total = total;
         }
     }

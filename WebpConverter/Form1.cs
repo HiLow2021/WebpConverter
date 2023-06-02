@@ -67,10 +67,10 @@ namespace WebpConverter
                     return;
                 }
 
-                EnableControls(false);
-
                 try
                 {
+                    EnableControls(false);
+
                     var imageFiles = listView1.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).WhereNotNull().ToArray();
                     var method = Convert(comboBox1.SelectedIndex);
                     var quality = (int)numericUpDown1.Value;
@@ -107,10 +107,10 @@ namespace WebpConverter
                     return;
                 }
 
-                EnableControls(false);
-
                 try
                 {
+                    EnableControls(false);
+
                     var imageFiles = listView2.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).WhereNotNull().ToArray();
                     var type = (DecodingType)comboBox2.SelectedIndex;
                     var jpegQuality = (int)numericUpDown2.Value;
