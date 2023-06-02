@@ -63,7 +63,7 @@ namespace WebpConverter
             {
                 try
                 {
-                    var imageFiles = listView1.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).ToArray();
+                    var imageFiles = listView1.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).WhereNotNull().ToArray();
                     var method = Convert(comboBox1.SelectedIndex);
                     var quality = (int)numericUpDown1.Value;
                     var filterStrength = 60;
@@ -89,7 +89,7 @@ namespace WebpConverter
             {
                 try
                 {
-                    var imageFiles = listView2.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).ToArray();
+                    var imageFiles = listView2.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).WhereNotNull().ToArray();
                     var type = (DecodingType)comboBox2.SelectedIndex;
                     var jpegQuality = (int)numericUpDown2.Value;
                     var skipMetadata = !checkBox5.Checked;
@@ -299,8 +299,8 @@ namespace WebpConverter
         {
             var listViewItems = imageFiles
                 .Except(listView.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile))
-                .Select(x => x is null ? null : new ListViewItem(x.Name) { Tag = x })
-                .Where(x => x is not null)
+                .WhereNotNull()
+                .Select(x => new ListViewItem(x.Name) { Tag = x })
                 .ToArray();
 
             listView.Items.AddRange(listViewItems);
