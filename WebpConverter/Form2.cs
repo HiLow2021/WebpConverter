@@ -28,6 +28,7 @@ namespace WebpConverter
                 radioButton3.Checked = settings.SaveDirectoryType == SaveDirectoryType.Specified;
                 textBox1.Text = settings.SaveDirectory;
             };
+            radioButton3.CheckedChanged += (sender, e) => EnableControls(radioButton3.Checked);
             button1.Click += (sender, e) =>
             {
                 if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
@@ -44,6 +45,12 @@ namespace WebpConverter
                 settings.SaveDirectoryType = radioButton1.Checked ? SaveDirectoryType.Same : radioButton2.Checked ? SaveDirectoryType.Sub : SaveDirectoryType.Specified;
                 settings.SaveDirectory = textBox1.Text;
             };
+        }
+
+        private void EnableControls(bool flag)
+        {
+            textBox1.Enabled = flag;
+            button1.Enabled = flag;
         }
     }
 }

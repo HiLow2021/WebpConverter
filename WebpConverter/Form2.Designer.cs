@@ -99,9 +99,9 @@
             this.checkBox4.AutoSize = true;
             this.checkBox4.Location = new System.Drawing.Point(18, 52);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(289, 19);
+            this.checkBox4.Size = new System.Drawing.Size(309, 19);
             this.checkBox4.TabIndex = 1;
-            this.checkBox4.Text = "フォルダ追加時にサブフォルダ内のファイルを対象に含める";
+            this.checkBox4.Text = "フォルダー追加時にサブフォルダー内のファイルを対象に含める";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // checkBox3
@@ -177,10 +177,10 @@
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(18, 80);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(185, 19);
+            this.radioButton3.Size = new System.Drawing.Size(274, 19);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "指定フォルダに出力フォルダを生成";
+            this.radioButton3.Text = "指定フォルダー以下にフォルダー構成をコピーして生成";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton2
@@ -188,10 +188,10 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(18, 52);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(244, 19);
+            this.radioButton2.Size = new System.Drawing.Size(327, 19);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "変換前のフォルダに出力フォルダ (out) を生成";
+            this.radioButton2.Text = "変換前のファイルと同じフォルダーに出力フォルダー (out) を生成";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
@@ -199,10 +199,10 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(18, 24);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(171, 19);
+            this.radioButton1.Size = new System.Drawing.Size(212, 19);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "変換前と同一のフォルダに保存";
+            this.radioButton1.Text = "変換前のファイルと同じフォルダーに保存";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // Form2

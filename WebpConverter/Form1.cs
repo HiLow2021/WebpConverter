@@ -19,6 +19,23 @@ namespace WebpConverter
             Shown += (sender, e) => LoadSettings();
             FormClosed += (sender, e) => SaveSettings();
 
+            addFileToolStripMenuItem.Click += (sender, e) =>
+            {
+                var index = concealableTabControl1.SelectedIndex;
+                var listView = index == 0 ? listView1 : listView2;
+                var openFileDialog = index == 0 ? openFileDialog1 : openFileDialog2;
+
+                AddFiles(listView, openFileDialog);
+            };
+            addDirectoryToolStripMenuItem.Click += (sender, e) =>
+            {
+                var index = concealableTabControl1.SelectedIndex;
+                var listView = index == 0 ? listView1 : listView2;
+                var folderBrowserDialog = index == 0 ? folderBrowserDialog1 : folderBrowserDialog2;
+                var filterExtensions = index == 0 ? MyAppSettings.EncodingExtensions : MyAppSettings.DecodingExtensions;
+
+                AddFiles(listView, folderBrowserDialog, filterExtensions);
+            };
             exitToolStripMenuItem.Click += (sender, e) => Application.Exit();
             encodeToolStripMenuItem.Click += (sender, e) => ChangeMode(0);
             decodeToolStripMenuItem.Click += (sender, e) => ChangeMode(1);
@@ -35,17 +52,18 @@ namespace WebpConverter
 
             listView1.DragEnter += DragEnter;
             listView2.DragEnter += DragEnter;
-            listView1.DragDrop += (sender, e) => DragDrop(sender, e, "png", "jpg", "jpeg", "gif", "bmp");
-            listView2.DragDrop += (sender, e) => DragDrop(sender, e, "webp");
+            listView1.DragDrop += (sender, e) => DragDrop(sender, e, MyAppSettings.EncodingExtensions);
+            listView2.DragDrop += (sender, e) => DragDrop(sender, e, MyAppSettings.DecodingExtensions);
             comboBox2.SelectedIndexChanged += (sender, e) => numericUpDown2.Enabled = comboBox2.SelectedIndex == 1;
-            button1.Click += (sender, e) => AddFile(listView1, openFileDialog1);
-            button2.Click += (sender, e) => RemoveFile(listView1);
-            button3.Click += (sender, e) => ClearFile(listView1);
-            button4.Click += async (sender, e) =>
+            button1.Click += (sender, e) => AddFiles(listView1, openFileDialog1);
+            button2.Click += (sender, e) => AddFiles(listView1, folderBrowserDialog1, MyAppSettings.EncodingExtensions);
+            button3.Click += (sender, e) => RemoveFiles(listView1);
+            button4.Click += (sender, e) => ClearFiles(listView1);
+            button5.Click += async (sender, e) =>
             {
                 try
                 {
-                    var paths = listView1.Items.Cast<ListViewItem>().Select(x => x.Text).ToArray();
+                    var imageFiles = listView1.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).ToArray();
                     var method = Convert(comboBox1.SelectedIndex);
                     var quality = (int)numericUpDown1.Value;
                     var filterStrength = 60;
@@ -55,7 +73,7 @@ namespace WebpConverter
                     var isDeleteFile = checkBox4.Checked;
                     var option = new { method, quality, filterStrength, skipMetadata, useAlpha, useLossless, isDeleteFile };
 
-                    await Execute(new Func<Task>(async () => await EncodeAsync(paths, option)));
+                    await Execute(new Func<Task>(async () => await EncodeAsync(imageFiles, option)));
                     MessageBox.Show("ˆ—‚ªŠ®—¹‚µ‚Ü‚µ‚½", "¬Œ÷");
                 }
                 catch (Exception ex)
@@ -63,21 +81,22 @@ namespace WebpConverter
                     MessageBox.Show(ex.Message, "ƒGƒ‰[");
                 }
             };
-            button5.Click += (sender, e) => AddFile(listView2, openFileDialog2);
-            button6.Click += (sender, e) => RemoveFile(listView2);
-            button7.Click += (sender, e) => ClearFile(listView2);
-            button8.Click += async (sender, e) =>
+            button6.Click += (sender, e) => AddFiles(listView2, openFileDialog2);
+            button7.Click += (sender, e) => AddFiles(listView2, folderBrowserDialog2, MyAppSettings.DecodingExtensions);
+            button8.Click += (sender, e) => RemoveFiles(listView2);
+            button9.Click += (sender, e) => ClearFiles(listView2);
+            button10.Click += async (sender, e) =>
             {
                 try
                 {
-                    var paths = listView2.Items.Cast<ListViewItem>().Select(x => x.Text).ToArray();
+                    var imageFiles = listView2.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).ToArray();
                     var type = (DecodingType)comboBox2.SelectedIndex;
                     var jpegQuality = (int)numericUpDown2.Value;
                     var skipMetadata = !checkBox5.Checked;
                     var isDeleteFile = checkBox6.Checked;
                     var option = new { type, jpegQuality, skipMetadata, isDeleteFile };
 
-                    await Execute(new Func<Task>(async () => await DecodeAsync(paths, option)));
+                    await Execute(new Func<Task>(async () => await DecodeAsync(imageFiles, option)));
                     MessageBox.Show("ˆ—‚ªŠ®—¹‚µ‚Ü‚µ‚½", "¬Œ÷");
                 }
                 catch (Exception ex)
@@ -114,7 +133,7 @@ namespace WebpConverter
                 }
             }
 
-            void DragDrop(object? sender, DragEventArgs e, params string[] filterExtensions)
+            void DragDrop(object? sender, DragEventArgs e, string[] filterExtensions)
             {
                 if (sender == null || e.Data == null)
                 {
@@ -123,32 +142,25 @@ namespace WebpConverter
 
                 var listView = (ListView)sender;
                 var fileSystemEntries = (string[]?)e.Data.GetData(DataFormats.FileDrop, false);
-                var files = fileSystemEntries?.SelectMany(x =>
+                var imageFiles = fileSystemEntries?.SelectMany(x =>
                 {
                     if (File.Exists(x))
                     {
-                        return new[] { x };
+                        return new[] { new ImageFile(x) };
                     }
                     else if (Directory.Exists(x))
                     {
                         var searchOption = _settings.IsIncludingSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
-                        return Directory.GetFiles(x, "*", searchOption);
+                        return Directory.GetFiles(x, "*", searchOption).Select(y => new ImageFile(y, x));
                     }
                     else
                     {
-                        return Array.Empty<string>();
+                        return Array.Empty<ImageFile>();
                     }
-                }).Distinct().Where(x =>
-                {
-                    return filterExtensions.Contains(Path.GetExtension(x).TrimStart('.').ToLower());
-                }).Except(listView.Items.Cast<ListViewItem>().Select(x => x.Text));
-                if (files == null)
-                {
-                    return;
-                }
+                }).Where(x => filterExtensions.Contains(x.Type.ToLower())).ToArray() ?? Array.Empty<ImageFile>();
 
-                listView.Items.AddRange(files.Select(x => new ListViewItem(x)).ToArray());
+                AddFiles(listView, imageFiles);
             }
 
             static WebpEncodingMethod Convert(int index)
@@ -165,60 +177,60 @@ namespace WebpConverter
             }
         }
 
-        private async Task EncodeAsync(string[] paths, dynamic option)
+        private async Task EncodeAsync(ImageFile[] imageFiles, dynamic option)
         {
             if (_settings.IsExecuteParallelly)
             {
                 var i = 0;
-                await Parallel.ForEachAsync(paths, async (x, token) =>
+                await Parallel.ForEachAsync(imageFiles, async (x, token) =>
                 {
-                    var destinationDirectory = GetDestinationDirectory(x);
+                    var destinationDirectory = GetDestinationDirectory(x.FullPath, x.BranchDirectory);
 
                     CreateDirectory(destinationDirectory);
-                    await _converter.EncodeAsync(x, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
-                    DeleteFile(x, option.isDeleteFile);
-                    UpdateProgress(progressBar1, paths.Length, ++i);
+                    await _converter.EncodeAsync(x.FullPath, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
+                    DeleteFile(x.FullPath, option.isDeleteFile);
+                    UpdateProgress(progressBar1, imageFiles.Length, ++i);
                 });
             }
             else
             {
-                foreach (var (item, i) in paths.Select((x, i) => (x, i)))
+                foreach (var (x, i) in imageFiles.Select((x, i) => (x, i)))
                 {
-                    var destinationDirectory = GetDestinationDirectory(item);
+                    var destinationDirectory = GetDestinationDirectory(x.FullPath, x.BranchDirectory);
 
                     CreateDirectory(destinationDirectory);
-                    await _converter.EncodeAsync(item, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
-                    DeleteFile(item, option.isDeleteFile);
-                    UpdateProgress(progressBar1, paths.Length, i + 1);
+                    await _converter.EncodeAsync(x.FullPath, destinationDirectory, option.method, option.quality, option.filterStrength, option.skipMetadata, option.useAlpha, option.useLossless);
+                    DeleteFile(x.FullPath, option.isDeleteFile);
+                    UpdateProgress(progressBar1, imageFiles.Length, i + 1);
                 }
             }
         }
 
-        private async Task DecodeAsync(string[] paths, dynamic option)
+        private async Task DecodeAsync(ImageFile[] imageFiles, dynamic option)
         {
             if (_settings.IsExecuteParallelly)
             {
                 var i = 0;
-                await Parallel.ForEachAsync(paths, async (x, token) =>
+                await Parallel.ForEachAsync(imageFiles, async (x, token) =>
                 {
-                    var destinationDirectory = GetDestinationDirectory(x);
+                    var destinationDirectory = GetDestinationDirectory(x.FullPath, x.BranchDirectory);
 
                     CreateDirectory(destinationDirectory);
-                    await _converter.DecodeAsync(x, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
-                    DeleteFile(x, option.isDeleteFile);
-                    UpdateProgress(progressBar2, paths.Length, ++i);
+                    await _converter.DecodeAsync(x.FullPath, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
+                    DeleteFile(x.FullPath, option.isDeleteFile);
+                    UpdateProgress(progressBar2, imageFiles.Length, ++i);
                 });
             }
             else
             {
-                foreach (var (item, i) in paths.Select((x, i) => (x, i)))
+                foreach (var (x, i) in imageFiles.Select((x, i) => (x, i)))
                 {
-                    var destinationDirectory = GetDestinationDirectory(item);
+                    var destinationDirectory = GetDestinationDirectory(x.FullPath, x.BranchDirectory);
 
                     CreateDirectory(destinationDirectory);
-                    await _converter.DecodeAsync(item, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
-                    DeleteFile(item, option.isDeleteFile);
-                    UpdateProgress(progressBar2, paths.Length, i + 1);
+                    await _converter.DecodeAsync(x.FullPath, destinationDirectory, option.type, option.jpegQuality, option.skipMetadata);
+                    DeleteFile(x.FullPath, option.isDeleteFile);
+                    UpdateProgress(progressBar2, imageFiles.Length, i + 1);
                 }
             }
         }
@@ -232,6 +244,8 @@ namespace WebpConverter
 
         private void EnableControls(bool flag)
         {
+            addFileToolStripMenuItem.Enabled = flag;
+            addDirectoryToolStripMenuItem.Enabled = flag;
             modeToolStripMenuItem.Enabled = flag;
             toolToolStripMenuItem.Enabled = flag;
             listView1.AllowDrop = flag;
@@ -254,17 +268,45 @@ namespace WebpConverter
             button6.Enabled = flag;
             button7.Enabled = flag;
             button8.Enabled = flag;
+            button9.Enabled = flag;
+            button10.Enabled = flag;
         }
 
-        private void AddFile(ListView listView, OpenFileDialog openFileDialog)
+        private void AddFiles(ListView listView, OpenFileDialog openFileDialog)
         {
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                listView.Items.Add(openFileDialog.FileName);
+                AddFiles(listView, new[] { new ImageFile(openFileDialog.FileName) });
             }
         }
 
-        private void RemoveFile(ListView listView)
+        private void AddFiles(ListView listView, FolderBrowserDialog folderBrowserDialog, string[] filterExtensions)
+        {
+            if (folderBrowserDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                var directory = folderBrowserDialog.SelectedPath;
+                var searchOption = _settings.IsIncludingSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+                var files = Directory.GetFiles(directory, "*", searchOption)
+                    .Select(x => new ImageFile(x, directory))
+                    .Where(x => filterExtensions.Contains(x.Type.ToLower()))
+                    .ToArray();
+
+                AddFiles(listView, files);
+            }
+        }
+
+        private void AddFiles(ListView listView, ImageFile[] imageFiles)
+        {
+            var listViewItems = imageFiles
+                .Except(listView.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile))
+                .Select(x => x is null ? null : new ListViewItem(x.Name) { Tag = x })
+                .Where(x => x is not null)
+                .ToArray();
+
+            listView.Items.AddRange(listViewItems);
+        }
+
+        private void RemoveFiles(ListView listView)
         {
             foreach (ListViewItem item in listView.SelectedItems)
             {
@@ -272,7 +314,7 @@ namespace WebpConverter
             }
         }
 
-        private void ClearFile(ListView listView)
+        private void ClearFiles(ListView listView)
         {
             listView.Items.Clear();
         }
@@ -290,7 +332,7 @@ namespace WebpConverter
             }));
         }
 
-        private string GetDestinationDirectory(string path)
+        private string GetDestinationDirectory(string path, string branchDirectory)
         {
             if (_settings.SaveDirectoryType == SaveDirectoryType.Same)
             {
@@ -302,7 +344,7 @@ namespace WebpConverter
             }
             else
             {
-                return _settings.SaveDirectory + Path.DirectorySeparatorChar + Path.GetFileName(Path.GetDirectoryName(path));
+                return _settings.SaveDirectory + Path.DirectorySeparatorChar + branchDirectory;
             }
         }
 

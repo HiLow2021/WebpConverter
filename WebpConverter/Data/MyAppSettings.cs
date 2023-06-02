@@ -10,6 +10,8 @@ namespace WebpConverter.Data
 {
     public class MyAppSettings
     {
+        public static string[] EncodingExtensions { get; } = new[] { "png", "jpg", "jpeg", "gif", "bmp" };
+        public static string[] DecodingExtensions { get; } = new[] { "webp" };
         public static string BaseDirectory { get; } = AppDomain.CurrentDomain.BaseDirectory;
         public static string ConfigPath { get; } = BaseDirectory + "config.dat";
         public static MyAppSettings Default { get; } = new MyAppSettings();
