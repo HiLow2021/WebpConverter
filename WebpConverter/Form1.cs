@@ -16,7 +16,7 @@ namespace WebpConverter
             comboBox1.SelectedIndex = 2;
             comboBox2.SelectedIndex = 0;
 
-            Load += (sender, e) => LoadSettings();
+            Shown += (sender, e) => LoadSettings();
             FormClosed += (sender, e) => SaveSettings();
 
             exitToolStripMenuItem.Click += (sender, e) => Application.Exit();
@@ -25,6 +25,7 @@ namespace WebpConverter
             optionToolStripMenuItem.Click += (sender, e) =>
             {
                 using var form = new Form2(_settings);
+                form.TopMost = _settings.IsTopMost;
 
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
