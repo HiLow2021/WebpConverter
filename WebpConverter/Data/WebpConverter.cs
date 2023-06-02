@@ -9,18 +9,14 @@ using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Formats.Webp;
+using WebpConverter.Data.Types;
 using Image = SixLabors.ImageSharp.Image;
 
 namespace WebpConverter.Data
 {
     public class WebpConverter
     {
-        public async Task EncodeAsync(string path, string destinationDirectory)
-        {
-            await EncodeAsync(path, destinationDirectory, WebpEncodingMethod.Default, 75, 60, false, true, false);
-        }
-
-        public async Task EncodeAsync(string path, string destinationDirectory, WebpEncodingMethod method, int quality, int filterStrength, bool skipMetadata, bool useAlphaCompression, bool nearLossless)
+        public async Task EncodeAsync(string path, string destinationDirectory, EncodingOption option)
         {
             if (!File.Exists(path) || !Directory.Exists(destinationDirectory))
             {
@@ -36,56 +32,51 @@ namespace WebpConverter.Data
             using var image = await Image.LoadAsync(path);
             var encoder = new WebpEncoder()
             {
-                Method = method,
-                Quality = quality,
-                FilterStrength = filterStrength,
-                SkipMetadata = skipMetadata,
-                UseAlphaCompression = useAlphaCompression,
-                NearLossless = nearLossless
+                Method = option.Method,
+                Quality = option.Quality,
+                FilterStrength = option.FilterStrength,
+                SkipMetadata = option.SkipMetadata,
+                UseAlphaCompression = option.UseAlphaCompression,
+                NearLossless = option.NearLossless
             };
 
             await image.SaveAsWebpAsync(destinationPath, encoder);
         }
 
-        public async Task DecodeAsync(string path, string destinationDirectory)
-        {
-            await DecodeAsync(path, destinationDirectory, DecodingType.Png, 75, false);
-        }
-
-        public async Task DecodeAsync(string path, string destinationDirectory, DecodingType type, int jpegQuality, bool skipMetadata)
+        public async Task DecodeAsync(string path, string destinationDirectory, DecodingOption option)
         {
             if (!File.Exists(path) || !Directory.Exists(destinationDirectory))
             {
                 return;
             }
 
-            var destinationPath = destinationDirectory + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(path) + GetExtension(type);
+            var destinationPath = destinationDirectory + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(path) + GetExtension(option);
             if (File.Exists(destinationPath))
             {
                 return;
             }
 
             using var image = await Image.LoadAsync(path);
-            var encoder = GetEncoder(type, jpegQuality, skipMetadata);
+            var encoder = GetEncoder(option);
 
             await image.SaveAsync(destinationPath, encoder);
         }
 
-        private static ImageEncoder GetEncoder(DecodingType type, int jpegQuality, bool skipMetadata)
+        private static ImageEncoder GetEncoder(DecodingOption option)
         {
-            return type switch
+            return option.Type switch
             {
-                DecodingType.Png => new PngEncoder() { SkipMetadata = skipMetadata, },
-                DecodingType.Jpg => new JpegEncoder() { Quality = jpegQuality, SkipMetadata = skipMetadata, },
-                DecodingType.Gif => new GifEncoder() { SkipMetadata = skipMetadata, },
-                DecodingType.Bmp => new BmpEncoder() { SkipMetadata = skipMetadata, },
+                DecodingType.Png => new PngEncoder() { SkipMetadata = option.SkipMetadata, },
+                DecodingType.Jpg => new JpegEncoder() { Quality = option.JpegQuality, SkipMetadata = option.SkipMetadata, },
+                DecodingType.Gif => new GifEncoder() { SkipMetadata = option.SkipMetadata, },
+                DecodingType.Bmp => new BmpEncoder() { SkipMetadata = option.SkipMetadata, },
                 _ => throw new NotSupportedException(),
             };
         }
 
-        private static string GetExtension(DecodingType type)
+        private static string GetExtension(DecodingOption option)
         {
-            return type switch
+            return option.Type switch
             {
                 DecodingType.Png => ".png",
                 DecodingType.Jpg => ".jpg",

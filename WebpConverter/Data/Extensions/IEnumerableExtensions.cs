@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebpConverter.Data
+namespace WebpConverter.Data.Extensions
 {
     public static class IEnumerableExtensions
     {
-        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source)
-            where T : class
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source) where T : class
         {
             if (source == null)
             {
