@@ -27,6 +27,7 @@ namespace WebpConverter
                 radioButton2.Checked = settings.SaveDirectoryType == SaveDirectoryType.Sub;
                 radioButton3.Checked = settings.SaveDirectoryType == SaveDirectoryType.Specified;
                 textBox1.Text = settings.SaveDirectory;
+                EnableControls(radioButton3.Checked);
             };
             radioButton3.CheckedChanged += (sender, e) => EnableControls(radioButton3.Checked);
             button1.Click += (sender, e) =>
