@@ -63,7 +63,11 @@ namespace WebpConverter
             listView2.DrawColumnHeader += DrawColumnHeader;
             listView1.DrawSubItem += (sender, e) => DrawSubItem(sender, e, new[] { 2, 3 });
             listView2.DrawSubItem += (sender, e) => DrawSubItem(sender, e, new[] { 1, 2 });
-            comboBox2.SelectedIndexChanged += (sender, e) => numericUpDown2.Enabled = comboBox2.SelectedIndex == 1;
+            comboBox2.SelectedIndexChanged += (sender, e) =>
+            {
+                _settings.DecodingType = (DecodingType)comboBox2.SelectedIndex;
+                numericUpDown2.Enabled = comboBox2.SelectedIndex == 1;
+            };
             button1.Click += (sender, e) => AddFiles(listView1, openFileDialog1);
             button2.Click += (sender, e) => AddFiles(listView1, folderBrowserDialog1, MyAppSettings.EncodingExtensions);
             button3.Click += (sender, e) => RemoveFiles(listView1);
@@ -125,7 +129,6 @@ namespace WebpConverter
                     var deleteFile = checkBox6.Checked;
                     var option = new DecodingOption(type, jpegQuality, skipMetadata, deleteFile);
 
-                    _settings.DecodingType = type;
                     _client.IsParallel = _settings.IsParallel;
                     PreProcess(imageFiles);
                     await _client.DecodeAsync(imageFiles, option);
