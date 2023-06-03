@@ -400,6 +400,7 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7});
+            this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(3, 6);
             this.listView1.Name = "listView1";
@@ -621,6 +622,7 @@
             this.columnHeader11,
             this.columnHeader12,
             this.columnHeader13});
+            this.listView2.FullRowSelect = true;
             this.listView2.GridLines = true;
             this.listView2.Location = new System.Drawing.Point(3, 6);
             this.listView2.Name = "listView2";
