@@ -59,7 +59,14 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
@@ -73,10 +80,14 @@
             this.button10 = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.listView2 = new System.Windows.Forms.ListView();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader11 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader12 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.button6 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1.SuspendLayout();
@@ -97,7 +108,7 @@
             this.toolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(684, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1384, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -150,14 +161,14 @@
             this.encodeToolStripMenuItem.CheckOnClick = true;
             this.encodeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.encodeToolStripMenuItem.Name = "encodeToolStripMenuItem";
-            this.encodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.encodeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.encodeToolStripMenuItem.Text = "エンコード(&E)";
             // 
             // decodeToolStripMenuItem
             // 
             this.decodeToolStripMenuItem.CheckOnClick = true;
             this.decodeToolStripMenuItem.Name = "decodeToolStripMenuItem";
-            this.decodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.decodeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.decodeToolStripMenuItem.Text = "デコード(&D)";
             // 
             // toolToolStripMenuItem
@@ -184,7 +195,7 @@
             this.concealableTabControl1.Location = new System.Drawing.Point(4, 27);
             this.concealableTabControl1.Name = "concealableTabControl1";
             this.concealableTabControl1.SelectedIndex = 0;
-            this.concealableTabControl1.Size = new System.Drawing.Size(680, 414);
+            this.concealableTabControl1.Size = new System.Drawing.Size(1380, 734);
             this.concealableTabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -205,14 +216,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(672, 386);
+            this.tabPage1.Size = new System.Drawing.Size(1372, 706);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "エンコード";
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(471, 241);
+            this.button1.Location = new System.Drawing.Point(1171, 561);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(195, 23);
             this.button1.TabIndex = 14;
@@ -226,7 +237,7 @@
             this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Location = new System.Drawing.Point(471, 74);
+            this.groupBox1.Location = new System.Drawing.Point(1171, 74);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(193, 127);
             this.groupBox1.TabIndex = 11;
@@ -280,7 +291,7 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(471, 328);
+            this.button4.Location = new System.Drawing.Point(1171, 648);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(195, 23);
             this.button4.TabIndex = 20;
@@ -290,7 +301,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(471, 299);
+            this.button3.Location = new System.Drawing.Point(1171, 619);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(195, 23);
             this.button3.TabIndex = 18;
@@ -300,7 +311,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(471, 270);
+            this.button2.Location = new System.Drawing.Point(1171, 590);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(195, 23);
             this.button2.TabIndex = 16;
@@ -311,7 +322,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(602, 15);
+            this.label2.Location = new System.Drawing.Point(1302, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 15);
             this.label2.TabIndex = 5;
@@ -320,7 +331,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(602, 37);
+            this.numericUpDown1.Location = new System.Drawing.Point(1302, 37);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(62, 23);
             this.numericUpDown1.TabIndex = 4;
@@ -334,7 +345,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(471, 15);
+            this.label1.Location = new System.Drawing.Point(1171, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 15);
             this.label1.TabIndex = 3;
@@ -351,7 +362,7 @@
             "標準 (※推奨)",
             "品質重視",
             "最高品質"});
-            this.comboBox1.Location = new System.Drawing.Point(471, 37);
+            this.comboBox1.Location = new System.Drawing.Point(1171, 37);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(119, 23);
             this.comboBox1.TabIndex = 2;
@@ -359,7 +370,7 @@
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(471, 357);
+            this.button5.Location = new System.Drawing.Point(1171, 677);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(195, 23);
             this.button5.TabIndex = 22;
@@ -370,9 +381,9 @@
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(3, 357);
+            this.progressBar1.Location = new System.Drawing.Point(3, 677);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(462, 23);
+            this.progressBar1.Size = new System.Drawing.Size(1162, 23);
             this.progressBar1.TabIndex = 1;
             // 
             // listView1
@@ -382,11 +393,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7});
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(3, 6);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(462, 345);
+            this.listView1.OwnerDraw = true;
+            this.listView1.Size = new System.Drawing.Size(1162, 665);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -394,7 +412,37 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "ファイル名";
-            this.columnHeader1.Width = 470;
+            this.columnHeader1.Width = 200;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "種類";
+            this.columnHeader2.Width = 80;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "サイズ (前)";
+            this.columnHeader3.Width = 120;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "サイズ (後)";
+            this.columnHeader4.Width = 120;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "変換率";
+            this.columnHeader5.Width = 80;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "パス";
+            this.columnHeader6.Width = 280;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "ベースフォルダー";
+            this.columnHeader7.Width = 280;
             // 
             // tabPage2
             // 
@@ -414,16 +462,26 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(672, 386);
+            this.tabPage2.Size = new System.Drawing.Size(1372, 706);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "デコード";
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.Location = new System.Drawing.Point(1171, 561);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(195, 23);
+            this.button6.TabIndex = 12;
+            this.button6.Text = "ファイルを追加...";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.checkBox6);
             this.groupBox2.Controls.Add(this.checkBox5);
-            this.groupBox2.Location = new System.Drawing.Point(471, 74);
+            this.groupBox2.Location = new System.Drawing.Point(1171, 74);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(193, 78);
             this.groupBox2.TabIndex = 16;
@@ -456,7 +514,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(602, 15);
+            this.label4.Location = new System.Drawing.Point(1302, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 15;
@@ -466,7 +524,7 @@
             // 
             this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown2.Enabled = false;
-            this.numericUpDown2.Location = new System.Drawing.Point(602, 37);
+            this.numericUpDown2.Location = new System.Drawing.Point(1302, 37);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(62, 23);
             this.numericUpDown2.TabIndex = 4;
@@ -480,7 +538,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(471, 15);
+            this.label3.Location = new System.Drawing.Point(1171, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 15);
             this.label3.TabIndex = 13;
@@ -496,7 +554,7 @@
             "JPG",
             "GIF",
             "BMP"});
-            this.comboBox2.Location = new System.Drawing.Point(471, 37);
+            this.comboBox2.Location = new System.Drawing.Point(1171, 37);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(119, 23);
             this.comboBox2.TabIndex = 2;
@@ -504,7 +562,7 @@
             // button9
             // 
             this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.Location = new System.Drawing.Point(471, 328);
+            this.button9.Location = new System.Drawing.Point(1171, 648);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(195, 23);
             this.button9.TabIndex = 18;
@@ -514,7 +572,7 @@
             // button8
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.Location = new System.Drawing.Point(471, 299);
+            this.button8.Location = new System.Drawing.Point(1171, 619);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(195, 23);
             this.button8.TabIndex = 16;
@@ -524,7 +582,7 @@
             // button7
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.Location = new System.Drawing.Point(471, 270);
+            this.button7.Location = new System.Drawing.Point(1171, 590);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(195, 23);
             this.button7.TabIndex = 14;
@@ -534,7 +592,7 @@
             // button10
             // 
             this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button10.Location = new System.Drawing.Point(471, 357);
+            this.button10.Location = new System.Drawing.Point(1171, 677);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(195, 23);
             this.button10.TabIndex = 20;
@@ -545,9 +603,9 @@
             // 
             this.progressBar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar2.Location = new System.Drawing.Point(3, 357);
+            this.progressBar2.Location = new System.Drawing.Point(3, 677);
             this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(462, 23);
+            this.progressBar2.Size = new System.Drawing.Size(1162, 23);
             this.progressBar2.TabIndex = 2;
             // 
             // listView2
@@ -557,19 +615,50 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2});
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12,
+            this.columnHeader13});
             this.listView2.GridLines = true;
             this.listView2.Location = new System.Drawing.Point(3, 6);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(462, 345);
+            this.listView2.OwnerDraw = true;
+            this.listView2.Size = new System.Drawing.Size(1162, 665);
             this.listView2.TabIndex = 1;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader2
+            // columnHeader8
             // 
-            this.columnHeader2.Text = "ファイル名";
-            this.columnHeader2.Width = 470;
+            this.columnHeader8.Text = "ファイル名";
+            this.columnHeader8.Width = 200;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "サイズ (前)";
+            this.columnHeader9.Width = 120;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "サイズ (後)";
+            this.columnHeader10.Width = 120;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "変換率";
+            this.columnHeader11.Width = 80;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "パス";
+            this.columnHeader12.Width = 280;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "ベースフォルダー";
+            this.columnHeader13.Width = 280;
             // 
             // openFileDialog1
             // 
@@ -579,21 +668,11 @@
             // 
             this.openFileDialog2.Filter = "WebPファイル|*.webp";
             // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(471, 241);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(195, 23);
-            this.button6.TabIndex = 12;
-            this.button6.Text = "ファイルを追加...";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 441);
+            this.ClientSize = new System.Drawing.Size(1384, 761);
             this.Controls.Add(this.concealableTabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -635,7 +714,7 @@
         private Button button5;
         private ColumnHeader columnHeader1;
         private ListView listView2;
-        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader8;
         private Button button10;
         private ProgressBar progressBar2;
         private ToolStripMenuItem toolToolStripMenuItem;
@@ -671,5 +750,16 @@
         private Button button6;
         private FolderBrowserDialog folderBrowserDialog1;
         private FolderBrowserDialog folderBrowserDialog2;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
+        private ColumnHeader columnHeader10;
+        private ColumnHeader columnHeader11;
+        private ColumnHeader columnHeader12;
+        private ColumnHeader columnHeader13;
+        private ColumnHeader columnHeader9;
     }
 }

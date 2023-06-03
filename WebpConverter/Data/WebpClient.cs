@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime;
 using System.Text;
@@ -14,11 +15,7 @@ namespace WebpConverter.Data
     {
         private readonly WebpConverter _converter = new();
 
-        public bool IsExecuteParallelly { get; set; }
-
-        public SaveDirectoryType SaveDirectoryType { get; set; }
-
-        public string SaveDirectory { get; set; } = string.Empty;
+        public bool IsParallel { get; set; }
 
         public bool IsRunning { get; private set; }
 
@@ -34,13 +31,13 @@ namespace WebpConverter.Data
 
             IsRunning = true;
 
-            if (IsExecuteParallelly)
+            if (IsParallel)
             {
                 var i = 0;
                 await Parallel.ForEachAsync(imageFiles, async (x, token) =>
                 {
                     await EncodeAsync(x, option);
-                    Progressed?.Invoke(this, new WebpProgressedEventArgs(++i, imageFiles.Length));
+                    Progressed?.Invoke(this, new WebpProgressedEventArgs(++i, imageFiles.Length, x));
                 });
             }
             else
@@ -48,7 +45,7 @@ namespace WebpConverter.Data
                 foreach (var (x, i) in imageFiles.Select((x, i) => (x, i)))
                 {
                     await EncodeAsync(x, option);
-                    Progressed?.Invoke(this, new WebpProgressedEventArgs(i + 1, imageFiles.Length));
+                    Progressed?.Invoke(this, new WebpProgressedEventArgs(i + 1, imageFiles.Length, x));
                 }
             }
 
@@ -65,13 +62,13 @@ namespace WebpConverter.Data
 
             IsRunning = true;
 
-            if (IsExecuteParallelly)
+            if (IsParallel)
             {
                 var i = 0;
                 await Parallel.ForEachAsync(imageFiles, async (x, token) =>
                 {
                     await DecodeAsync(x, option);
-                    Progressed?.Invoke(this, new WebpProgressedEventArgs(++i, imageFiles.Length));
+                    Progressed?.Invoke(this, new WebpProgressedEventArgs(++i, imageFiles.Length, x));
                 });
             }
             else
@@ -79,7 +76,7 @@ namespace WebpConverter.Data
                 foreach (var (x, i) in imageFiles.Select((x, i) => (x, i)))
                 {
                     await DecodeAsync(x, option);
-                    Progressed?.Invoke(this, new WebpProgressedEventArgs(i + 1, imageFiles.Length));
+                    Progressed?.Invoke(this, new WebpProgressedEventArgs(i + 1, imageFiles.Length, x));
                 }
             }
 
@@ -87,57 +84,29 @@ namespace WebpConverter.Data
             IsRunning = false;
         }
 
-        public void SetProperties(bool isExecuteParallelly, SaveDirectoryType saveDirectoryType, string saveDirectory)
-        {
-            if (IsRunning)
-            {
-                return;
-            }
-
-            IsExecuteParallelly = isExecuteParallelly;
-            SaveDirectoryType = saveDirectoryType;
-            SaveDirectory = saveDirectory;
-        }
-
         private async Task EncodeAsync(ImageFile imageFile, EncodingOption option)
         {
-            var destinationDirectory = GetDestinationDirectory(imageFile.FullPath, imageFile.BranchDirectory);
-
-            CreateDirectory(destinationDirectory);
-            await _converter.EncodeAsync(imageFile.FullPath, destinationDirectory, option);
-            DeleteFile(imageFile.FullPath, option.DeleteFile);
+            CreateDirectory(imageFile.DestinationPath);
+            await _converter.EncodeAsync(imageFile.Path, imageFile.DestinationPath, option);
+            imageFile.ConvertedSize = new FileInfo(imageFile.DestinationPath).Length;
+            DeleteFile(imageFile.Path, option.DeleteFile);
         }
 
         private async Task DecodeAsync(ImageFile imageFile, DecodingOption option)
         {
-            var destinationDirectory = GetDestinationDirectory(imageFile.FullPath, imageFile.BranchDirectory);
-
-            CreateDirectory(destinationDirectory);
-            await _converter.DecodeAsync(imageFile.FullPath, destinationDirectory, option);
-            DeleteFile(imageFile.FullPath, option.DeleteFile);
-        }
-
-        private string GetDestinationDirectory(string path, string branchDirectory)
-        {
-            if (SaveDirectoryType == SaveDirectoryType.Same)
-            {
-                return Path.GetDirectoryName(path) ?? string.Empty;
-            }
-            else if (SaveDirectoryType == SaveDirectoryType.Sub)
-            {
-                return Path.GetDirectoryName(path) + Path.DirectorySeparatorChar + "out";
-            }
-            else
-            {
-                return SaveDirectory + Path.DirectorySeparatorChar + branchDirectory;
-            }
+            CreateDirectory(imageFile.DestinationPath);
+            await _converter.DecodeAsync(imageFile.Path, imageFile.DestinationPath, option);
+            imageFile.ConvertedSize = new FileInfo(imageFile.DestinationPath).Length;
+            DeleteFile(imageFile.Path, option.DeleteFile);
         }
 
         private static void CreateDirectory(string path)
         {
-            if (!Directory.Exists(path))
+            var directory = Path.GetDirectoryName(path);
+
+            if (directory != null && !Directory.Exists(directory))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(directory);
             }
         }
 

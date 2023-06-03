@@ -16,20 +16,14 @@ namespace WebpConverter.Data
 {
     public class WebpConverter
     {
-        public async Task EncodeAsync(string path, string destinationDirectory, EncodingOption option)
+        public async Task EncodeAsync(string source, string destination, EncodingOption option)
         {
-            if (!File.Exists(path) || !Directory.Exists(destinationDirectory))
+            if (!File.Exists(source) || File.Exists(destination))
             {
                 return;
             }
 
-            var destinationPath = destinationDirectory + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(path) + ".webp";
-            if (File.Exists(destinationPath))
-            {
-                return;
-            }
-
-            using var image = await Image.LoadAsync(path);
+            using var image = await Image.LoadAsync(source);
             var encoder = new WebpEncoder()
             {
                 Method = option.Method,
@@ -40,26 +34,20 @@ namespace WebpConverter.Data
                 NearLossless = option.NearLossless
             };
 
-            await image.SaveAsWebpAsync(destinationPath, encoder);
+            await image.SaveAsWebpAsync(destination, encoder);
         }
 
-        public async Task DecodeAsync(string path, string destinationDirectory, DecodingOption option)
+        public async Task DecodeAsync(string source, string destination, DecodingOption option)
         {
-            if (!File.Exists(path) || !Directory.Exists(destinationDirectory))
+            if (!File.Exists(source) || File.Exists(destination))
             {
                 return;
             }
 
-            var destinationPath = destinationDirectory + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(path) + GetExtension(option);
-            if (File.Exists(destinationPath))
-            {
-                return;
-            }
-
-            using var image = await Image.LoadAsync(path);
+            using var image = await Image.LoadAsync(source);
             var encoder = GetEncoder(option);
 
-            await image.SaveAsync(destinationPath, encoder);
+            await image.SaveAsync(destination, encoder);
         }
 
         private static ImageEncoder GetEncoder(DecodingOption option)
@@ -70,18 +58,6 @@ namespace WebpConverter.Data
                 DecodingType.Jpg => new JpegEncoder() { Quality = option.JpegQuality, SkipMetadata = option.SkipMetadata, },
                 DecodingType.Gif => new GifEncoder() { SkipMetadata = option.SkipMetadata, },
                 DecodingType.Bmp => new BmpEncoder() { SkipMetadata = option.SkipMetadata, },
-                _ => throw new NotSupportedException(),
-            };
-        }
-
-        private static string GetExtension(DecodingOption option)
-        {
-            return option.Type switch
-            {
-                DecodingType.Png => ".png",
-                DecodingType.Jpg => ".jpg",
-                DecodingType.Gif => ".gif",
-                DecodingType.Bmp => ".bmp",
                 _ => throw new NotSupportedException(),
             };
         }

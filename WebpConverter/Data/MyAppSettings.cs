@@ -22,7 +22,7 @@ namespace WebpConverter.Data
         public bool IsTopMost { get; set; } = false;
         public bool IsFixedWindowsPosition { get; set; } = false;
 
-        public bool IsExecuteParallelly { get; set; } = false;
+        public bool IsParallel { get; set; } = false;
         public bool IsIncludingSubDirectories { get; set; } = false;
         public SaveDirectoryType SaveDirectoryType { get; set; } = SaveDirectoryType.Specified;
         public string SaveDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -50,7 +50,7 @@ namespace WebpConverter.Data
                 IsTopMost = settings.IsTopMost;
                 IsFixedWindowsPosition = settings.IsFixedWindowsPosition;
 
-                IsExecuteParallelly = settings.IsExecuteParallelly;
+                IsParallel = settings.IsParallel;
                 IsIncludingSubDirectories = settings.IsIncludingSubDirectories;
                 SaveDirectoryType = settings.SaveDirectoryType;
                 SaveDirectory = settings.SaveDirectory;

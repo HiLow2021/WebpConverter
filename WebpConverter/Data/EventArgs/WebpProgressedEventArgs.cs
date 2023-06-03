@@ -14,11 +14,14 @@ namespace WebpConverter.Data.EventArgs
 
         public int Total { get; }
 
-        public WebpProgressedEventArgs(int progress, int total)
+        public ImageFile ImageFile { get; }
+
+        public WebpProgressedEventArgs(int progress, int total, ImageFile imageFile)
         {
             Progress = progress;
             ProgressPercentage = total == 0 ? 100 : (int)(progress / (float)total * 100);
             Total = total;
+            ImageFile = imageFile;
         }
     }
 }

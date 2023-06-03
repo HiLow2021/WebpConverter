@@ -22,7 +22,7 @@ namespace WebpConverter
             {
                 checkBox1.Checked = settings.IsTopMost;
                 checkBox2.Checked = settings.IsFixedWindowsPosition;
-                checkBox3.Checked = settings.IsExecuteParallelly;
+                checkBox3.Checked = settings.IsParallel;
                 checkBox4.Checked = settings.IsIncludingSubDirectories;
                 radioButton1.Checked = settings.SaveDirectoryType == SaveDirectoryType.Same;
                 radioButton2.Checked = settings.SaveDirectoryType == SaveDirectoryType.Sub;
@@ -42,7 +42,7 @@ namespace WebpConverter
             {
                 settings.IsTopMost = checkBox1.Checked;
                 settings.IsFixedWindowsPosition = checkBox2.Checked;
-                settings.IsExecuteParallelly = checkBox3.Checked;
+                settings.IsParallel = checkBox3.Checked;
                 settings.IsIncludingSubDirectories = checkBox4.Checked;
                 settings.SaveDirectoryType = radioButton1.Checked ? SaveDirectoryType.Same : radioButton2.Checked ? SaveDirectoryType.Sub : SaveDirectoryType.Specified;
                 settings.SaveDirectory = textBox1.Text;

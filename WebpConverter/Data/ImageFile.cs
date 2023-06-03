@@ -8,25 +8,29 @@ namespace WebpConverter.Data
 {
     public class ImageFile : IEquatable<ImageFile>
     {
+        public int Index { get; set; }
+
         public string Name { get; set; }
 
         public string Type { get; set; }
 
-        public string FullPath { get; set; }
+        public string Path { get; set; }
+
+        public string DestinationPath { get; set; }
 
         public string BaseDirectory { get; set; }
 
-        public string SubDirectory => Path.GetDirectoryName(FullPath.Replace(BaseDirectory + Path.DirectorySeparatorChar, string.Empty)) ?? string.Empty;
+        public string SubDirectory => System.IO.Path.GetDirectoryName(Path.Replace(BaseDirectory + System.IO.Path.DirectorySeparatorChar, string.Empty)) ?? string.Empty;
 
-        public string BranchDirectory => SubDirectory == string.Empty ? Path.GetFileName(BaseDirectory) : Path.GetFileName(BaseDirectory) + Path.DirectorySeparatorChar + SubDirectory;
+        public string BranchDirectory => SubDirectory == string.Empty ? System.IO.Path.GetFileName(BaseDirectory) : System.IO.Path.GetFileName(BaseDirectory) + System.IO.Path.DirectorySeparatorChar + SubDirectory;
 
         public long OriginalSize { get; set; }
 
-        public long ConvertedSize { get; set; }
+        public long? ConvertedSize { get; set; }
 
-        public int ConversionRatio => ConvertedSize == 0 ? 0 : (int)(OriginalSize / (float)ConvertedSize * 100);
+        public float? ConversionRatio => OriginalSize == 0 ? null : ConvertedSize / (float)OriginalSize * 100;
 
-        public ImageFile(string path) : this(path, Path.GetDirectoryName(path) ?? string.Empty) { }
+        public ImageFile(string path) : this(path, System.IO.Path.GetDirectoryName(path) ?? string.Empty) { }
 
         public ImageFile(string path, string baseDirectory)
         {
@@ -34,7 +38,8 @@ namespace WebpConverter.Data
 
             Name = info.Name;
             Type = info.Extension.TrimStart('.').ToUpper();
-            FullPath = path;
+            Path = path;
+            DestinationPath = string.Empty;
             BaseDirectory = baseDirectory;
             OriginalSize = info.Length;
         }
@@ -47,7 +52,7 @@ namespace WebpConverter.Data
             }
             else
             {
-                return FullPath == other.FullPath;
+                return Path == other.Path;
             }
         }
 
@@ -58,7 +63,7 @@ namespace WebpConverter.Data
 
         public override int GetHashCode()
         {
-            return new { FullPath }.GetHashCode();
+            return new { Path }.GetHashCode();
         }
     }
 }

@@ -1,4 +1,6 @@
+using Controls;
 using SixLabors.ImageSharp.Formats.Webp;
+using System.IO;
 using WebpConverter.Data;
 using WebpConverter.Data.Extensions;
 using WebpConverter.Data.Types;
@@ -51,10 +53,15 @@ namespace WebpConverter
                 }
             };
 
+            concealableTabControl1.SelectedIndexChanged += (sender, e) => _settings.IsDecodeMode = concealableTabControl1.SelectedIndex == 1;
             listView1.DragEnter += DragEnter;
             listView2.DragEnter += DragEnter;
             listView1.DragDrop += (sender, e) => DragDrop(sender, e, MyAppSettings.EncodingExtensions);
             listView2.DragDrop += (sender, e) => DragDrop(sender, e, MyAppSettings.DecodingExtensions);
+            listView1.DrawColumnHeader += DrawColumnHeader;
+            listView2.DrawColumnHeader += DrawColumnHeader;
+            listView1.DrawSubItem += (sender, e) => DrawSubItem(sender, e, new[] { 2, 3 });
+            listView2.DrawSubItem += (sender, e) => DrawSubItem(sender, e, new[] { 1, 2 });
             comboBox2.SelectedIndexChanged += (sender, e) => numericUpDown2.Enabled = comboBox2.SelectedIndex == 1;
             button1.Click += (sender, e) => AddFiles(listView1, openFileDialog1);
             button2.Click += (sender, e) => AddFiles(listView1, folderBrowserDialog1, MyAppSettings.EncodingExtensions);
@@ -81,9 +88,8 @@ namespace WebpConverter
                     var deleteFile = checkBox4.Checked;
                     var option = new EncodingOption(method, quality, filterStrength, skipMetadata, useAlphaCompression, nearLossless, deleteFile);
 
-                    _client.SetProperties(_settings.IsExecuteParallelly, _settings.SaveDirectoryType, _settings.SaveDirectory);
-                    _settings.IsDecodeMode = concealableTabControl1.SelectedIndex == 1;
-
+                    _client.IsParallel = _settings.IsParallel;
+                    PreProcess(imageFiles);
                     await _client.EncodeAsync(imageFiles, option);
                     MessageBox.Show("ˆ—‚ªŠ®—¹‚µ‚Ü‚µ‚½", "¬Œ÷");
                 }
@@ -118,9 +124,8 @@ namespace WebpConverter
                     var deleteFile = checkBox6.Checked;
                     var option = new DecodingOption(type, jpegQuality, skipMetadata, deleteFile);
 
-                    _client.SetProperties(_settings.IsExecuteParallelly, _settings.SaveDirectoryType, _settings.SaveDirectory);
-                    _settings.IsDecodeMode = concealableTabControl1.SelectedIndex == 1;
-
+                    _client.IsParallel = _settings.IsParallel;
+                    PreProcess(imageFiles);
                     await _client.DecodeAsync(imageFiles, option);
                     MessageBox.Show("ˆ—‚ªŠ®—¹‚µ‚Ü‚µ‚½", "¬Œ÷");
                 }
@@ -136,8 +141,10 @@ namespace WebpConverter
 
             _client.Progressed += (sender, e) =>
             {
+                var listView = _settings.IsDecodeMode ? listView2 : listView1;
                 var progressBar = _settings.IsDecodeMode ? progressBar2 : progressBar1;
 
+                UpdateListView(listView, e.ImageFile);
                 UpdateProgress(progressBar, e.ProgressPercentage);
             };
             _client.Completed += (sender, e) =>
@@ -187,6 +194,30 @@ namespace WebpConverter
                 }).Where(x => filterExtensions.Contains(x.Type.ToLower())).ToArray() ?? Array.Empty<ImageFile>();
 
                 AddFiles(listView, imageFiles);
+            }
+
+            void DrawColumnHeader(object? sender, DrawListViewColumnHeaderEventArgs e)
+            {
+                e.DrawDefault = true;
+                e.DrawBackground();
+                e.DrawText();
+            }
+
+            void DrawSubItem(object? sender, DrawListViewSubItemEventArgs e, int[] indices)
+            {
+                if (e.Item?.Selected ?? false)
+                {
+                    e.Graphics.FillRectangle(Brushes.LightSkyBlue, e.Bounds);
+                }
+                else
+                {
+                    e.DrawBackground();
+                }
+
+                var flags = indices.Contains(e.ColumnIndex) ? TextFormatFlags.Right : TextFormatFlags.Default;
+                flags |= TextFormatFlags.NoPadding;
+
+                e.DrawText(flags);
             }
 
             static WebpEncodingMethod Convert(int index)
@@ -268,7 +299,22 @@ namespace WebpConverter
             var listViewItems = imageFiles
                 .Except(listView.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile))
                 .WhereNotNull()
-                .Select(x => new ListViewItem(x.Name) { Tag = x })
+                .Select(x =>
+                {
+                    var denominator = 1024;
+                    var items = new[]
+                    {
+                        x.Name,
+                        listView == listView1 ? x.Type : null,
+                        $"{x.OriginalSize / denominator:N0} KB",
+                        string.Empty,
+                        string.Empty,
+                        x.Path,
+                        x.BaseDirectory
+                    }.WhereNotNull().ToArray();
+
+                    return new ListViewItem(items) { Tag = x };
+                })
                 .ToArray();
 
             listView.Items.AddRange(listViewItems);
@@ -287,6 +333,19 @@ namespace WebpConverter
             listView.Items.Clear();
         }
 
+        private void UpdateListView(ListView listView, ImageFile imageFile)
+        {
+            listView.Invoke(new Action(() =>
+            {
+                var denominator = 1024;
+                var offset = listView == listView1 ? 1 : 0;
+                var item = listView.Items[imageFile.Index];
+
+                item.SubItems[2 + offset].Text = $"{imageFile.ConvertedSize / denominator:N0} KB";
+                item.SubItems[3 + offset].Text = $"{imageFile.ConversionRatio:F1} %";
+            }));
+        }
+
         private static void UpdateProgress(ProgressBar progressBar, int percentage)
         {
             progressBar.Invoke(new Action(() =>
@@ -296,6 +355,43 @@ namespace WebpConverter
                     progressBar.Value = percentage;
                 }
             }));
+        }
+
+        private void PreProcess(ImageFile[] imageFiles)
+        {
+            for (int i = 0; i < imageFiles.Length; i++)
+            {
+                imageFiles[i].Index = i;
+                imageFiles[i].DestinationPath = GetDirectory(imageFiles[i]) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(imageFiles[i].Path) + GetExtension();
+            }
+
+            string GetDirectory(ImageFile imageFile)
+            {
+                return _settings.SaveDirectoryType switch
+                {
+                    SaveDirectoryType.Same => Path.GetDirectoryName(imageFile.Path) ?? string.Empty,
+                    SaveDirectoryType.Sub => Path.GetDirectoryName(imageFile.Path) + Path.DirectorySeparatorChar + "out",
+                    SaveDirectoryType.Specified => _settings.SaveDirectory + Path.DirectorySeparatorChar + imageFile.BranchDirectory,
+                    _ => throw new NotSupportedException(),
+                };
+            }
+
+            string GetExtension()
+            {
+                if (!_settings.IsDecodeMode)
+                {
+                    return ".webp";
+                }
+
+                return _settings.DecodingType switch
+                {
+                    DecodingType.Png => ".png",
+                    DecodingType.Jpg => ".jpg",
+                    DecodingType.Gif => ".gif",
+                    DecodingType.Bmp => ".bmp",
+                    _ => throw new NotSupportedException(),
+                };
+            }
         }
 
         private void LoadSettings()
