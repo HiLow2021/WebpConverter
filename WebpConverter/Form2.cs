@@ -21,9 +21,10 @@ namespace WebpConverter
             Load += (sender, e) =>
             {
                 checkBox1.Checked = settings.IsTopMost;
-                checkBox2.Checked = settings.IsFixedWindowsPosition;
-                checkBox3.Checked = settings.IsParallel;
-                checkBox4.Checked = settings.IsIncludingSubDirectories;
+                checkBox2.Checked = settings.IsFixedWindowPosition;
+                checkBox3.Checked = settings.IsFixedWindowSize;
+                checkBox4.Checked = settings.IsParallel;
+                checkBox5.Checked = settings.IsIncludingSubDirectories;
                 radioButton1.Checked = settings.SaveDirectoryType == SaveDirectoryType.Same;
                 radioButton2.Checked = settings.SaveDirectoryType == SaveDirectoryType.Sub;
                 radioButton3.Checked = settings.SaveDirectoryType == SaveDirectoryType.Specified;
@@ -41,9 +42,10 @@ namespace WebpConverter
             button2.Click += (sender, e) =>
             {
                 settings.IsTopMost = checkBox1.Checked;
-                settings.IsFixedWindowsPosition = checkBox2.Checked;
-                settings.IsParallel = checkBox3.Checked;
-                settings.IsIncludingSubDirectories = checkBox4.Checked;
+                settings.IsFixedWindowPosition = checkBox2.Checked;
+                settings.IsFixedWindowSize = checkBox3.Checked;
+                settings.IsParallel = checkBox4.Checked;
+                settings.IsIncludingSubDirectories = checkBox5.Checked;
                 settings.SaveDirectoryType = radioButton1.Checked ? SaveDirectoryType.Same : radioButton2.Checked ? SaveDirectoryType.Sub : SaveDirectoryType.Specified;
                 settings.SaveDirectory = textBox1.Text;
             };

@@ -19,7 +19,8 @@ namespace WebpConverter
             comboBox1.SelectedIndex = 2;
             comboBox2.SelectedIndex = 0;
 
-            Shown += (sender, e) => LoadSettings();
+            Load += (sender, e) => LoadSettings();
+            Shown += (sender, e) => TopMost = _settings.IsTopMost;
             FormClosed += (sender, e) => SaveSettings();
 
             addFileToolStripMenuItem.Click += (sender, e) =>
@@ -398,12 +399,15 @@ namespace WebpConverter
         {
             _settings.Load();
 
-            TopMost = _settings.IsTopMost;
-
-            if (_settings.IsFixedWindowsPosition)
+            if (_settings.IsFixedWindowPosition)
             {
                 Left = _settings.Left;
                 Top = _settings.Top;
+            }
+            if (_settings.IsFixedWindowSize)
+            {
+                Width = _settings.Width;
+                Height = _settings.Height;
             }
 
             concealableTabControl1.SelectedIndex = _settings.IsDecodeMode ? 1 : 0;
@@ -430,6 +434,9 @@ namespace WebpConverter
                 _settings.Left = Left;
                 _settings.Top = Top;
             }
+
+            _settings.Width = Width;
+            _settings.Height = Height;
 
             _settings.IsDecodeMode = concealableTabControl1.SelectedIndex == 1;
 

@@ -19,8 +19,11 @@ namespace WebpConverter.Data
 
         public int Left { get; set; }
         public int Top { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         public bool IsTopMost { get; set; } = false;
-        public bool IsFixedWindowsPosition { get; set; } = false;
+        public bool IsFixedWindowPosition { get; set; } = false;
+        public bool IsFixedWindowSize { get; set; } = false;
 
         public bool IsParallel { get; set; } = false;
         public bool IsIncludingSubDirectories { get; set; } = false;
@@ -47,8 +50,11 @@ namespace WebpConverter.Data
             {
                 Left = settings.Left;
                 Top = settings.Top;
+                Width = settings.Width;
+                Height = settings.Height;
                 IsTopMost = settings.IsTopMost;
-                IsFixedWindowsPosition = settings.IsFixedWindowsPosition;
+                IsFixedWindowPosition = settings.IsFixedWindowPosition;
+                IsFixedWindowSize = settings.IsFixedWindowSize;
 
                 IsParallel = settings.IsParallel;
                 IsIncludingSubDirectories = settings.IsIncludingSubDirectories;
