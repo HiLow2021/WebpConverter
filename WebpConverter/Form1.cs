@@ -125,6 +125,7 @@ namespace WebpConverter
                     var deleteFile = checkBox6.Checked;
                     var option = new DecodingOption(type, jpegQuality, skipMetadata, deleteFile);
 
+                    _settings.DecodingType = type;
                     _client.IsParallel = _settings.IsParallel;
                     PreProcess(imageFiles);
                     await _client.DecodeAsync(imageFiles, option);
