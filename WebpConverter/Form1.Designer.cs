@@ -432,7 +432,7 @@
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "変換率";
+            this.columnHeader5.Text = "サイズ割合";
             this.columnHeader5.Width = 80;
             // 
             // columnHeader6
@@ -649,7 +649,7 @@
             // 
             // columnHeader11
             // 
-            this.columnHeader11.Text = "変換率";
+            this.columnHeader11.Text = "サイズ割合";
             this.columnHeader11.Width = 80;
             // 
             // columnHeader12
