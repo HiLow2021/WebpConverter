@@ -628,7 +628,7 @@
             this.listView2.Name = "listView2";
             this.listView2.OwnerDraw = true;
             this.listView2.Size = new System.Drawing.Size(1162, 665);
-            this.listView2.TabIndex = 1;
+            this.listView2.TabIndex = 0;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
             // 
