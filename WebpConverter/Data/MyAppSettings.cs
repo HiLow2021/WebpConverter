@@ -26,6 +26,8 @@ namespace WebpConverter.Data
         public bool IsFixedWindowSize { get; set; } = false;
 
         public bool IsParallel { get; set; } = false;
+        public bool IsOverwriteFile { get; set; } = false;
+        public bool IsDeleteFile { get; set; } = false;
         public bool IsIncludingSubDirectories { get; set; } = false;
         public SaveDirectoryType SaveDirectoryType { get; set; } = SaveDirectoryType.Specified;
         public string SaveDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -57,6 +59,8 @@ namespace WebpConverter.Data
                 IsFixedWindowSize = settings.IsFixedWindowSize;
 
                 IsParallel = settings.IsParallel;
+                IsOverwriteFile = settings.IsOverwriteFile;
+                IsDeleteFile = settings.IsDeleteFile;
                 IsIncludingSubDirectories = settings.IsIncludingSubDirectories;
                 SaveDirectoryType = settings.SaveDirectoryType;
                 SaveDirectory = settings.SaveDirectory;

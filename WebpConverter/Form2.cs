@@ -24,7 +24,9 @@ namespace WebpConverter
                 checkBox2.Checked = settings.IsFixedWindowPosition;
                 checkBox3.Checked = settings.IsFixedWindowSize;
                 checkBox4.Checked = settings.IsParallel;
-                checkBox5.Checked = settings.IsIncludingSubDirectories;
+                checkBox5.Checked = settings.IsOverwriteFile;
+                checkBox6.Checked = settings.IsDeleteFile;
+                checkBox7.Checked = settings.IsIncludingSubDirectories;
                 radioButton1.Checked = settings.SaveDirectoryType == SaveDirectoryType.Same;
                 radioButton2.Checked = settings.SaveDirectoryType == SaveDirectoryType.Sub;
                 radioButton3.Checked = settings.SaveDirectoryType == SaveDirectoryType.Specified;
@@ -45,7 +47,9 @@ namespace WebpConverter
                 settings.IsFixedWindowPosition = checkBox2.Checked;
                 settings.IsFixedWindowSize = checkBox3.Checked;
                 settings.IsParallel = checkBox4.Checked;
-                settings.IsIncludingSubDirectories = checkBox5.Checked;
+                settings.IsOverwriteFile = checkBox5.Checked;
+                settings.IsDeleteFile = checkBox6.Checked;
+                settings.IsIncludingSubDirectories = checkBox7.Checked;
                 settings.SaveDirectoryType = radioButton1.Checked ? SaveDirectoryType.Same : radioButton2.Checked ? SaveDirectoryType.Sub : SaveDirectoryType.Specified;
                 settings.SaveDirectory = textBox1.Text;
             };

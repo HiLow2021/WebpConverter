@@ -21,8 +21,6 @@ namespace WebpConverter.Data
 
         public bool NearLossless { get; }
 
-        public bool DeleteFile { get; }
-
         public EncodingOption()
         {
             Method = WebpEncodingMethod.Default;
@@ -31,10 +29,9 @@ namespace WebpConverter.Data
             SkipMetadata = false;
             UseAlphaCompression = true;
             NearLossless = false;
-            DeleteFile = false;
         }
 
-        public EncodingOption(WebpEncodingMethod method, int quality, int filterStrength, bool skipMetadata, bool useAlphaCompression, bool nearLossless, bool deleteFile)
+        public EncodingOption(WebpEncodingMethod method, int quality, int filterStrength, bool skipMetadata, bool useAlphaCompression, bool nearLossless)
         {
             Method = method;
             Quality = quality;
@@ -42,7 +39,6 @@ namespace WebpConverter.Data
             SkipMetadata = skipMetadata;
             UseAlphaCompression = useAlphaCompression;
             NearLossless = nearLossless;
-            DeleteFile = deleteFile;
         }
     }
 }

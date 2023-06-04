@@ -15,22 +15,18 @@ namespace WebpConverter.Data
 
         public bool SkipMetadata { get; }
 
-        public bool DeleteFile { get; }
-
         public DecodingOption()
         {
             Type = DecodingType.Png;
             JpegQuality = 75;
             SkipMetadata = false;
-            DeleteFile = false;
         }
 
-        public DecodingOption(DecodingType type, int jpegQuality, bool skipMetadata, bool deleteFile)
+        public DecodingOption(DecodingType type, int jpegQuality, bool skipMetadata)
         {
             Type = type;
             JpegQuality = jpegQuality;
             SkipMetadata = skipMetadata;
-            DeleteFile = deleteFile;
         }
     }
 }

@@ -17,6 +17,10 @@ namespace WebpConverter.Data
 
         public bool IsParallel { get; set; }
 
+        public bool IsOverwriteFile { get; set; }
+
+        public bool IsDeleteFile { get; set; }
+
         public bool IsRunning { get; private set; }
 
         public event EventHandler<WebpProgressedEventArgs>? Progressed;
@@ -86,18 +90,36 @@ namespace WebpConverter.Data
 
         private async Task EncodeAsync(ImageFile imageFile, EncodingOption option)
         {
+            if (!IsOverwriteFile && File.Exists(imageFile.DestinationPath))
+            {
+                return;
+            }
+
             CreateDirectory(imageFile.DestinationPath);
             await _converter.EncodeAsync(imageFile.Path, imageFile.DestinationPath, option);
             imageFile.ConvertedSize = new FileInfo(imageFile.DestinationPath).Length;
-            DeleteFile(imageFile.Path, option.DeleteFile);
+
+            if (IsDeleteFile)
+            {
+                File.Delete(imageFile.Path);
+            }
         }
 
         private async Task DecodeAsync(ImageFile imageFile, DecodingOption option)
         {
+            if (!IsOverwriteFile && File.Exists(imageFile.DestinationPath))
+            {
+                return;
+            }
+
             CreateDirectory(imageFile.DestinationPath);
             await _converter.DecodeAsync(imageFile.Path, imageFile.DestinationPath, option);
             imageFile.ConvertedSize = new FileInfo(imageFile.DestinationPath).Length;
-            DeleteFile(imageFile.Path, option.DeleteFile);
+
+            if (IsDeleteFile)
+            {
+                File.Delete(imageFile.Path);
+            }
         }
 
         private static void CreateDirectory(string path)
@@ -107,14 +129,6 @@ namespace WebpConverter.Data
             if (directory != null && !Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
-            }
-        }
-
-        private static void DeleteFile(string path, bool deleteFile)
-        {
-            if (deleteFile)
-            {
-                File.Delete(path);
             }
         }
     }

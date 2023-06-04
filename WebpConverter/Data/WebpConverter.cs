@@ -18,7 +18,7 @@ namespace WebpConverter.Data
     {
         public async Task EncodeAsync(string source, string destination, EncodingOption option)
         {
-            if (!File.Exists(source) || File.Exists(destination))
+            if (!File.Exists(source))
             {
                 return;
             }
@@ -39,7 +39,7 @@ namespace WebpConverter.Data
 
         public async Task DecodeAsync(string source, string destination, DecodingOption option)
         {
-            if (!File.Exists(source) || File.Exists(destination))
+            if (!File.Exists(source))
             {
                 return;
             }

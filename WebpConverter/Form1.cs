@@ -49,6 +49,9 @@ namespace WebpConverter
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     TopMost = _settings.IsTopMost;
+                    _client.IsParallel = _settings.IsParallel;
+                    _client.IsOverwriteFile = _settings.IsOverwriteFile;
+                    _client.IsDeleteFile = _settings.IsDeleteFile;
                 }
             };
 
@@ -88,12 +91,11 @@ namespace WebpConverter
                     var skipMetadata = !checkBox1.Checked;
                     var useAlphaCompression = checkBox2.Checked;
                     var nearLossless = checkBox3.Checked;
-                    var deleteFile = checkBox4.Checked;
-                    var option = new EncodingOption(method, quality, filterStrength, skipMetadata, useAlphaCompression, nearLossless, deleteFile);
+                    var option = new EncodingOption(method, quality, filterStrength, skipMetadata, useAlphaCompression, nearLossless);
 
-                    _client.IsParallel = _settings.IsParallel;
                     PreProcess(imageFiles);
                     await _client.EncodeAsync(imageFiles, option);
+
                     MessageBox.Show("èàóùÇ™äÆóπÇµÇ‹ÇµÇΩ", "ê¨å˜");
                 }
                 catch (Exception ex)
@@ -123,13 +125,12 @@ namespace WebpConverter
                     var imageFiles = listView2.Items.Cast<ListViewItem>().Select(x => x.Tag as ImageFile).WhereNotNull().ToArray();
                     var type = (DecodingType)comboBox2.SelectedIndex;
                     var jpegQuality = (int)numericUpDown2.Value;
-                    var skipMetadata = !checkBox5.Checked;
-                    var deleteFile = checkBox6.Checked;
-                    var option = new DecodingOption(type, jpegQuality, skipMetadata, deleteFile);
+                    var skipMetadata = !checkBox4.Checked;
+                    var option = new DecodingOption(type, jpegQuality, skipMetadata);
 
-                    _client.IsParallel = _settings.IsParallel;
                     PreProcess(imageFiles);
                     await _client.DecodeAsync(imageFiles, option);
+
                     MessageBox.Show("èàóùÇ™äÆóπÇµÇ‹ÇµÇΩ", "ê¨å˜");
                 }
                 catch (Exception ex)
@@ -260,8 +261,6 @@ namespace WebpConverter
             checkBox2.Enabled = flag;
             checkBox3.Enabled = flag;
             checkBox4.Enabled = flag;
-            checkBox5.Enabled = flag;
-            checkBox6.Enabled = flag;
             button1.Enabled = flag;
             button2.Enabled = flag;
             button3.Enabled = flag;
@@ -425,8 +424,11 @@ namespace WebpConverter
 
             comboBox2.SelectedIndex = (int)_settings.DecodingType;
             numericUpDown2.Value = _settings.DecodingJpegQuality;
-            checkBox5.Checked = _settings.DecodingSaveMetadata;
-            checkBox6.Checked = _settings.DecodingDeleteFile;
+            checkBox4.Checked = _settings.DecodingSaveMetadata;
+
+            _client.IsParallel = _settings.IsParallel;
+            _client.IsOverwriteFile = _settings.IsOverwriteFile;
+            _client.IsDeleteFile = _settings.IsDeleteFile;
         }
 
         private void SaveSettings()
@@ -451,8 +453,7 @@ namespace WebpConverter
 
             _settings.DecodingType = (DecodingType)comboBox2.SelectedIndex;
             _settings.DecodingJpegQuality = (int)numericUpDown2.Value;
-            _settings.DecodingSaveMetadata = checkBox5.Checked;
-            _settings.DecodingDeleteFile = checkBox6.Checked;
+            _settings.DecodingSaveMetadata = checkBox4.Checked;
 
             _settings.Save();
         }

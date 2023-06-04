@@ -44,7 +44,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -68,8 +67,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -233,26 +231,15 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.checkBox4);
             this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Location = new System.Drawing.Point(1171, 74);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(193, 127);
+            this.groupBox1.Size = new System.Drawing.Size(193, 104);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "オプション";
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(16, 96);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(155, 19);
-            this.checkBox4.TabIndex = 12;
-            this.checkBox4.Text = "エンコードしたファイルを削除";
-            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // checkBox3
             // 
@@ -480,36 +467,25 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.checkBox6);
-            this.groupBox2.Controls.Add(this.checkBox5);
+            this.groupBox2.Controls.Add(this.checkBox4);
             this.groupBox2.Location = new System.Drawing.Point(1171, 74);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(193, 78);
+            this.groupBox2.Size = new System.Drawing.Size(193, 54);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "オプション";
             // 
-            // checkBox6
+            // checkBox4
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(16, 47);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(147, 19);
-            this.checkBox6.TabIndex = 10;
-            this.checkBox6.Text = "デコードしたファイルを削除";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Checked = true;
-            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox5.Location = new System.Drawing.Point(16, 22);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(103, 19);
-            this.checkBox5.TabIndex = 6;
-            this.checkBox5.Text = "メタデータを保存";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.Location = new System.Drawing.Point(16, 22);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(103, 19);
+            this.checkBox4.TabIndex = 6;
+            this.checkBox4.Text = "メタデータを保存";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -732,7 +708,6 @@
         private CheckBox checkBox1;
         private CheckBox checkBox2;
         private GroupBox groupBox1;
-        private CheckBox checkBox4;
         private CheckBox checkBox3;
         private Button button9;
         private Button button8;
@@ -742,8 +717,7 @@
         private Label label4;
         private NumericUpDown numericUpDown2;
         private GroupBox groupBox2;
-        private CheckBox checkBox5;
-        private CheckBox checkBox6;
+        private CheckBox checkBox4;
         private OpenFileDialog openFileDialog1;
         private OpenFileDialog openFileDialog2;
         private ToolStripMenuItem addFileToolStripMenuItem;
