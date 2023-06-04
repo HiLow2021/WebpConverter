@@ -33,6 +33,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -44,8 +46,6 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -71,7 +71,7 @@
             this.checkBox3.Location = new System.Drawing.Point(18, 82);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(186, 19);
-            this.checkBox3.TabIndex = 2;
+            this.checkBox3.TabIndex = 4;
             this.checkBox3.Text = "終了時のウィンドウのサイズを保存";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
@@ -81,7 +81,7 @@
             this.checkBox2.Location = new System.Drawing.Point(18, 52);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(181, 19);
-            this.checkBox2.TabIndex = 1;
+            this.checkBox2.TabIndex = 2;
             this.checkBox2.Text = "終了時のウィンドウの位置を保存";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
@@ -110,13 +110,33 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "動作";
             // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(18, 112);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(309, 19);
+            this.checkBox7.TabIndex = 6;
+            this.checkBox7.Text = "フォルダー追加時にサブフォルダー内のファイルを対象に含める";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(18, 82);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(208, 19);
+            this.checkBox6.TabIndex = 4;
+            this.checkBox6.Text = "処理完了後に変換前のファイルを削除";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
             this.checkBox5.Location = new System.Drawing.Point(18, 52);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(194, 19);
-            this.checkBox5.TabIndex = 1;
+            this.checkBox5.TabIndex = 2;
             this.checkBox5.Text = "同名のファイルの上書き保存を許可";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
@@ -137,7 +157,7 @@
             this.button2.Location = new System.Drawing.Point(216, 436);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
+            this.button2.TabIndex = 6;
             this.button2.Text = "OK";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -148,7 +168,7 @@
             this.button3.Location = new System.Drawing.Point(297, 436);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
+            this.button3.TabIndex = 8;
             this.button3.Text = "キャンセル";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -164,7 +184,7 @@
             this.groupBox3.Location = new System.Drawing.Point(12, 284);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(360, 146);
-            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ファイルの保存先";
             // 
@@ -174,7 +194,7 @@
             this.button1.Location = new System.Drawing.Point(279, 108);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
+            this.button1.TabIndex = 8;
             this.button1.Text = "参照...";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -186,7 +206,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(255, 23);
-            this.textBox1.TabIndex = 3;
+            this.textBox1.TabIndex = 6;
             // 
             // radioButton3
             // 
@@ -194,7 +214,7 @@
             this.radioButton3.Location = new System.Drawing.Point(18, 80);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(274, 19);
-            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabIndex = 4;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "指定フォルダー以下にフォルダー構成をコピーして保存";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -205,7 +225,7 @@
             this.radioButton2.Location = new System.Drawing.Point(18, 52);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(327, 19);
-            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabIndex = 2;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "変換前のファイルと同じフォルダーに出力フォルダー (out) を生成";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -220,26 +240,6 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "変換前のファイルと同じフォルダーに保存";
             this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(18, 82);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(208, 19);
-            this.checkBox6.TabIndex = 2;
-            this.checkBox6.Text = "処理完了後に変換前のファイルを削除";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(18, 112);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(309, 19);
-            this.checkBox7.TabIndex = 3;
-            this.checkBox7.Text = "フォルダー追加時にサブフォルダー内のファイルを対象に含める";
-            this.checkBox7.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 

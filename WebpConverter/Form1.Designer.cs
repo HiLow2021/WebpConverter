@@ -224,7 +224,7 @@
             this.button1.Location = new System.Drawing.Point(1171, 561);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(195, 23);
-            this.button1.TabIndex = 14;
+            this.button1.TabIndex = 8;
             this.button1.Text = "ファイルを追加...";
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -237,7 +237,7 @@
             this.groupBox1.Location = new System.Drawing.Point(1171, 74);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(193, 104);
-            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "オプション";
             // 
@@ -247,7 +247,7 @@
             this.checkBox3.Location = new System.Drawing.Point(16, 72);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(139, 19);
-            this.checkBox3.TabIndex = 10;
+            this.checkBox3.TabIndex = 4;
             this.checkBox3.Text = "Lossless モードで実行";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
@@ -259,7 +259,7 @@
             this.checkBox1.Location = new System.Drawing.Point(16, 22);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(103, 19);
-            this.checkBox1.TabIndex = 6;
+            this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "メタデータを保存";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -271,7 +271,7 @@
             this.checkBox2.Location = new System.Drawing.Point(16, 47);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(139, 19);
-            this.checkBox2.TabIndex = 8;
+            this.checkBox2.TabIndex = 2;
             this.checkBox2.Text = "アルファチャンネルを保存";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
@@ -281,7 +281,7 @@
             this.button4.Location = new System.Drawing.Point(1171, 648);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(195, 23);
-            this.button4.TabIndex = 20;
+            this.button4.TabIndex = 14;
             this.button4.Text = "全消去";
             this.button4.UseVisualStyleBackColor = true;
             // 
@@ -291,7 +291,7 @@
             this.button3.Location = new System.Drawing.Point(1171, 619);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(195, 23);
-            this.button3.TabIndex = 18;
+            this.button3.TabIndex = 12;
             this.button3.Text = "削除";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -301,7 +301,7 @@
             this.button2.Location = new System.Drawing.Point(1171, 590);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(195, 23);
-            this.button2.TabIndex = 16;
+            this.button2.TabIndex = 10;
             this.button2.Text = "フォルダーを追加...";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -360,7 +360,7 @@
             this.button5.Location = new System.Drawing.Point(1171, 677);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(195, 23);
-            this.button5.TabIndex = 22;
+            this.button5.TabIndex = 16;
             this.button5.Text = "実行";
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -460,7 +460,7 @@
             this.button6.Location = new System.Drawing.Point(1171, 561);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(195, 23);
-            this.button6.TabIndex = 12;
+            this.button6.TabIndex = 8;
             this.button6.Text = "ファイルを追加...";
             this.button6.UseVisualStyleBackColor = true;
             // 
@@ -471,7 +471,7 @@
             this.groupBox2.Location = new System.Drawing.Point(1171, 74);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(193, 54);
-            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "オプション";
             // 
@@ -483,7 +483,7 @@
             this.checkBox4.Location = new System.Drawing.Point(16, 22);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(103, 19);
-            this.checkBox4.TabIndex = 6;
+            this.checkBox4.TabIndex = 0;
             this.checkBox4.Text = "メタデータを保存";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
@@ -542,7 +542,7 @@
             this.button9.Location = new System.Drawing.Point(1171, 648);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(195, 23);
-            this.button9.TabIndex = 18;
+            this.button9.TabIndex = 14;
             this.button9.Text = "全消去";
             this.button9.UseVisualStyleBackColor = true;
             // 
@@ -552,7 +552,7 @@
             this.button8.Location = new System.Drawing.Point(1171, 619);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(195, 23);
-            this.button8.TabIndex = 16;
+            this.button8.TabIndex = 12;
             this.button8.Text = "削除";
             this.button8.UseVisualStyleBackColor = true;
             // 
@@ -562,7 +562,7 @@
             this.button7.Location = new System.Drawing.Point(1171, 590);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(195, 23);
-            this.button7.TabIndex = 14;
+            this.button7.TabIndex = 10;
             this.button7.Text = "フォルダーを追加...";
             this.button7.UseVisualStyleBackColor = true;
             // 
@@ -572,7 +572,7 @@
             this.button10.Location = new System.Drawing.Point(1171, 677);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(195, 23);
-            this.button10.TabIndex = 20;
+            this.button10.TabIndex = 16;
             this.button10.Text = "実行";
             this.button10.UseVisualStyleBackColor = true;
             // 
