@@ -1,6 +1,4 @@
-using Controls;
 using SixLabors.ImageSharp.Formats.Webp;
-using System.IO;
 using WebpConverter.Data;
 using WebpConverter.Data.Extensions;
 using WebpConverter.Data.Types;
