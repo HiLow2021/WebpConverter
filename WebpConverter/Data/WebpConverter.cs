@@ -18,11 +18,6 @@ namespace WebpConverter.Data
     {
         public async Task EncodeAsync(string source, string destination, EncodingOption option)
         {
-            if (!File.Exists(source))
-            {
-                return;
-            }
-
             using var image = await Image.LoadAsync(source);
             using var stream = new FileStream(destination, FileMode.OpenOrCreate);
             var encoder = new WebpEncoder()
@@ -40,11 +35,6 @@ namespace WebpConverter.Data
 
         public async Task DecodeAsync(string source, string destination, DecodingOption option)
         {
-            if (!File.Exists(source))
-            {
-                return;
-            }
-
             using var image = await Image.LoadAsync(source);
             using var stream = new FileStream(destination, FileMode.OpenOrCreate);
             var encoder = GetEncoder(option);

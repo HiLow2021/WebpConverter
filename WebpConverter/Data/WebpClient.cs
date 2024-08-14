@@ -90,6 +90,10 @@ namespace WebpConverter.Data
 
         private async Task EncodeAsync(ImageFile imageFile, EncodingOption option)
         {
+            if (!File.Exists(imageFile.Path))
+            {
+                return;
+            }
             if (!IsOverwriteFile && File.Exists(imageFile.DestinationPath))
             {
                 return;
@@ -97,8 +101,11 @@ namespace WebpConverter.Data
 
             CreateDirectory(imageFile.DestinationPath);
             await _converter.EncodeAsync(imageFile.Path, imageFile.DestinationPath, option);
-            imageFile.ConvertedSize = new FileInfo(imageFile.DestinationPath).Length;
 
+            if (File.Exists(imageFile.DestinationPath))
+            {
+                imageFile.ConvertedSize = new FileInfo(imageFile.DestinationPath).Length;
+            }
             if (IsDeleteFile)
             {
                 File.Delete(imageFile.Path);
@@ -107,6 +114,10 @@ namespace WebpConverter.Data
 
         private async Task DecodeAsync(ImageFile imageFile, DecodingOption option)
         {
+            if (!File.Exists(imageFile.Path))
+            {
+                return;
+            }
             if (!IsOverwriteFile && File.Exists(imageFile.DestinationPath))
             {
                 return;
@@ -114,8 +125,11 @@ namespace WebpConverter.Data
 
             CreateDirectory(imageFile.DestinationPath);
             await _converter.DecodeAsync(imageFile.Path, imageFile.DestinationPath, option);
-            imageFile.ConvertedSize = new FileInfo(imageFile.DestinationPath).Length;
 
+            if (File.Exists(imageFile.DestinationPath))
+            {
+                imageFile.ConvertedSize = new FileInfo(imageFile.DestinationPath).Length;
+            }
             if (IsDeleteFile)
             {
                 File.Delete(imageFile.Path);
