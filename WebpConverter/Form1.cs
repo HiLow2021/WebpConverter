@@ -261,7 +261,7 @@ namespace WebpConverter
             comboBox1.Enabled = flag;
             comboBox2.Enabled = flag;
             numericUpDown1.Enabled = flag;
-            numericUpDown2.Enabled = flag;
+            numericUpDown2.Enabled = flag ? comboBox2.SelectedIndex == 1 : flag;
             checkBox1.Enabled = flag;
             checkBox2.Enabled = flag;
             checkBox3.Enabled = flag;
