@@ -40,7 +40,7 @@
             decodeToolStripMenuItem = new ToolStripMenuItem();
             toolToolStripMenuItem = new ToolStripMenuItem();
             optionToolStripMenuItem = new ToolStripMenuItem();
-            concealableTabControl1 = new Controls.ConcealableTabControl();
+            tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             button1 = new Button();
             groupBox1 = new GroupBox();
@@ -89,7 +89,7 @@
             folderBrowserDialog1 = new FolderBrowserDialog();
             folderBrowserDialog2 = new FolderBrowserDialog();
             menuStrip1.SuspendLayout();
-            concealableTabControl1.SuspendLayout();
+            tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -173,17 +173,16 @@
             optionToolStripMenuItem.Size = new Size(148, 22);
             optionToolStripMenuItem.Text = "オプション...(&O)";
             // 
-            // concealableTabControl1
+            // tabControl1
             // 
-            concealableTabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            concealableTabControl1.ConcealedTab = false;
-            concealableTabControl1.Controls.Add(tabPage1);
-            concealableTabControl1.Controls.Add(tabPage2);
-            concealableTabControl1.Location = new Point(12, 38);
-            concealableTabControl1.Name = "concealableTabControl1";
-            concealableTabControl1.SelectedIndex = 0;
-            concealableTabControl1.Size = new Size(1360, 711);
-            concealableTabControl1.TabIndex = 1;
+            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new Point(12, 38);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(1360, 711);
+            tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
@@ -604,7 +603,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1384, 761);
-            Controls.Add(concealableTabControl1);
+            Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
@@ -614,7 +613,7 @@
             Text = "WebpConverter";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            concealableTabControl1.ResumeLayout(false);
+            tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -637,7 +636,7 @@
         private ToolStripMenuItem modeToolStripMenuItem;
         private ToolStripMenuItem encodeToolStripMenuItem;
         private ToolStripMenuItem decodeToolStripMenuItem;
-        private Controls.ConcealableTabControl concealableTabControl1;
+        private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private ProgressBar progressBar1;

@@ -23,7 +23,7 @@ namespace WebpConverter
 
             addFileToolStripMenuItem.Click += (sender, e) =>
             {
-                var index = concealableTabControl1.SelectedIndex;
+                var index = tabControl1.SelectedIndex;
                 var listView = index == 0 ? listView1 : listView2;
                 var openFileDialog = index == 0 ? openFileDialog1 : openFileDialog2;
 
@@ -31,7 +31,7 @@ namespace WebpConverter
             };
             addDirectoryToolStripMenuItem.Click += (sender, e) =>
             {
-                var index = concealableTabControl1.SelectedIndex;
+                var index = tabControl1.SelectedIndex;
                 var listView = index == 0 ? listView1 : listView2;
                 var folderBrowserDialog = index == 0 ? folderBrowserDialog1 : folderBrowserDialog2;
                 var filterExtensions = index == 0 ? MyAppSettings.EncodingExtensions : MyAppSettings.DecodingExtensions;
@@ -55,7 +55,12 @@ namespace WebpConverter
                 }
             };
 
-            concealableTabControl1.SelectedIndexChanged += (sender, e) => _settings.IsDecodeMode = concealableTabControl1.SelectedIndex == 1;
+            tabControl1.SelectedIndexChanged += (sender, e) =>
+            {
+                _settings.IsDecodeMode = tabControl1.SelectedIndex == 1;
+                encodeToolStripMenuItem.Checked = tabControl1.SelectedIndex == 0;
+                decodeToolStripMenuItem.Checked = tabControl1.SelectedIndex == 1;
+            };
             listView1.DragEnter += DragEnter;
             listView2.DragEnter += DragEnter;
             listView1.DragDrop += (sender, e) => DragDrop(sender, e, MyAppSettings.EncodingExtensions);
@@ -242,7 +247,7 @@ namespace WebpConverter
         {
             encodeToolStripMenuItem.Checked = index == 0;
             decodeToolStripMenuItem.Checked = index == 1;
-            concealableTabControl1.SelectedIndex = index;
+            tabControl1.SelectedIndex = index;
         }
 
         private void EnableControls(bool flag)
@@ -411,7 +416,7 @@ namespace WebpConverter
                 Height = _settings.Height;
             }
 
-            concealableTabControl1.SelectedIndex = _settings.IsDecodeMode ? 1 : 0;
+            tabControl1.SelectedIndex = _settings.IsDecodeMode ? 1 : 0;
             encodeToolStripMenuItem.Checked = !_settings.IsDecodeMode;
             decodeToolStripMenuItem.Checked = _settings.IsDecodeMode;
 
@@ -442,7 +447,7 @@ namespace WebpConverter
             _settings.Width = Width;
             _settings.Height = Height;
 
-            _settings.IsDecodeMode = concealableTabControl1.SelectedIndex == 1;
+            _settings.IsDecodeMode = tabControl1.SelectedIndex == 1;
 
             _settings.EncodingMethod = (EncodingMethod)comboBox1.SelectedIndex;
             _settings.EncodingQuality = (int)numericUpDown1.Value;
