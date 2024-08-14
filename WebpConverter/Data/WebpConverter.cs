@@ -24,6 +24,7 @@ namespace WebpConverter.Data
             }
 
             using var image = await Image.LoadAsync(source);
+            using var stream = new FileStream(destination, FileMode.OpenOrCreate);
             var encoder = new WebpEncoder()
             {
                 Method = option.Method,
@@ -34,7 +35,7 @@ namespace WebpConverter.Data
                 NearLossless = option.NearLossless
             };
 
-            await image.SaveAsWebpAsync(destination, encoder);
+            await image.SaveAsync(stream, encoder);
         }
 
         public async Task DecodeAsync(string source, string destination, DecodingOption option)
@@ -45,9 +46,10 @@ namespace WebpConverter.Data
             }
 
             using var image = await Image.LoadAsync(source);
+            using var stream = new FileStream(destination, FileMode.OpenOrCreate);
             var encoder = GetEncoder(option);
 
-            await image.SaveAsync(destination, encoder);
+            await image.SaveAsync(stream, encoder);
         }
 
         private static ImageEncoder GetEncoder(DecodingOption option)
