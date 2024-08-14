@@ -17,8 +17,4 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WebpConverter.Controls\WebpConverter.Controls.csproj" />
-  </ItemGroup>
-
 </Project>
