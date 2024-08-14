@@ -178,10 +178,10 @@
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(12, 38);
+            tabControl1.Location = new Point(12, 36);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1360, 711);
+            tabControl1.Size = new Size(1360, 713);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -202,14 +202,14 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1352, 683);
+            tabPage1.Size = new Size(1352, 685);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "エンコード";
             // 
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Location = new Point(1151, 538);
+            button1.Location = new Point(1151, 540);
             button1.Name = "button1";
             button1.Size = new Size(195, 23);
             button1.TabIndex = 8;
@@ -266,7 +266,7 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button4.Location = new Point(1151, 625);
+            button4.Location = new Point(1151, 627);
             button4.Name = "button4";
             button4.Size = new Size(195, 23);
             button4.TabIndex = 14;
@@ -276,7 +276,7 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button3.Location = new Point(1151, 596);
+            button3.Location = new Point(1151, 598);
             button3.Name = "button3";
             button3.Size = new Size(195, 23);
             button3.TabIndex = 12;
@@ -286,7 +286,7 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button2.Location = new Point(1151, 567);
+            button2.Location = new Point(1151, 569);
             button2.Name = "button2";
             button2.Size = new Size(195, 23);
             button2.TabIndex = 10;
@@ -336,7 +336,7 @@
             // button5
             // 
             button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button5.Location = new Point(1151, 654);
+            button5.Location = new Point(1151, 656);
             button5.Name = "button5";
             button5.Size = new Size(195, 23);
             button5.TabIndex = 16;
@@ -346,7 +346,7 @@
             // progressBar1
             // 
             progressBar1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            progressBar1.Location = new Point(5, 654);
+            progressBar1.Location = new Point(5, 656);
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new Size(1139, 23);
             progressBar1.TabIndex = 1;
@@ -361,7 +361,7 @@
             listView1.Location = new Point(5, 7);
             listView1.Name = "listView1";
             listView1.OwnerDraw = true;
-            listView1.Size = new Size(1139, 640);
+            listView1.Size = new Size(1139, 642);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -419,14 +419,14 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1352, 683);
+            tabPage2.Size = new Size(1352, 687);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "デコード";
             // 
             // button6
             // 
             button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button6.Location = new Point(1151, 538);
+            button6.Location = new Point(1151, 542);
             button6.Name = "button6";
             button6.Size = new Size(195, 23);
             button6.TabIndex = 8;
@@ -500,7 +500,7 @@
             // button9
             // 
             button9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button9.Location = new Point(1151, 625);
+            button9.Location = new Point(1151, 629);
             button9.Name = "button9";
             button9.Size = new Size(195, 23);
             button9.TabIndex = 14;
@@ -510,7 +510,7 @@
             // button8
             // 
             button8.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button8.Location = new Point(1151, 596);
+            button8.Location = new Point(1151, 600);
             button8.Name = "button8";
             button8.Size = new Size(195, 23);
             button8.TabIndex = 12;
@@ -520,7 +520,7 @@
             // button7
             // 
             button7.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button7.Location = new Point(1151, 567);
+            button7.Location = new Point(1151, 571);
             button7.Name = "button7";
             button7.Size = new Size(195, 23);
             button7.TabIndex = 10;
@@ -530,7 +530,7 @@
             // button10
             // 
             button10.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button10.Location = new Point(1151, 654);
+            button10.Location = new Point(1151, 658);
             button10.Name = "button10";
             button10.Size = new Size(195, 23);
             button10.TabIndex = 16;
@@ -540,7 +540,7 @@
             // progressBar2
             // 
             progressBar2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            progressBar2.Location = new Point(5, 654);
+            progressBar2.Location = new Point(5, 658);
             progressBar2.Name = "progressBar2";
             progressBar2.Size = new Size(1139, 23);
             progressBar2.TabIndex = 2;
@@ -555,7 +555,7 @@
             listView2.Location = new Point(5, 7);
             listView2.Name = "listView2";
             listView2.OwnerDraw = true;
-            listView2.Size = new Size(1139, 640);
+            listView2.Size = new Size(1139, 644);
             listView2.TabIndex = 0;
             listView2.UseCompatibleStateImageBehavior = false;
             listView2.View = View.Details;
