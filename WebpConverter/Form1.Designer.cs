@@ -103,7 +103,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, modeToolStripMenuItem, toolToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1384, 24);
+            menuStrip1.Size = new Size(834, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -181,7 +181,7 @@
             tabControl1.Location = new Point(12, 36);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1360, 713);
+            tabControl1.Size = new Size(810, 513);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -202,14 +202,14 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1352, 685);
+            tabPage1.Size = new Size(802, 485);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "エンコード";
             // 
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Location = new Point(1151, 540);
+            button1.Location = new Point(601, 340);
             button1.Name = "button1";
             button1.Size = new Size(195, 23);
             button1.TabIndex = 8;
@@ -222,7 +222,7 @@
             groupBox1.Controls.Add(checkBox3);
             groupBox1.Controls.Add(checkBox1);
             groupBox1.Controls.Add(checkBox2);
-            groupBox1.Location = new Point(1151, 74);
+            groupBox1.Location = new Point(601, 74);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(193, 104);
             groupBox1.TabIndex = 6;
@@ -266,7 +266,7 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button4.Location = new Point(1151, 627);
+            button4.Location = new Point(601, 427);
             button4.Name = "button4";
             button4.Size = new Size(195, 23);
             button4.TabIndex = 14;
@@ -276,7 +276,7 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button3.Location = new Point(1151, 598);
+            button3.Location = new Point(601, 398);
             button3.Name = "button3";
             button3.Size = new Size(195, 23);
             button3.TabIndex = 12;
@@ -286,7 +286,7 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button2.Location = new Point(1151, 569);
+            button2.Location = new Point(601, 369);
             button2.Name = "button2";
             button2.Size = new Size(195, 23);
             button2.TabIndex = 10;
@@ -297,7 +297,7 @@
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(1282, 15);
+            label2.Location = new Point(732, 15);
             label2.Name = "label2";
             label2.Size = new Size(31, 15);
             label2.TabIndex = 5;
@@ -306,7 +306,7 @@
             // numericUpDown1
             // 
             numericUpDown1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            numericUpDown1.Location = new Point(1282, 37);
+            numericUpDown1.Location = new Point(732, 37);
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(62, 23);
             numericUpDown1.TabIndex = 4;
@@ -316,7 +316,7 @@
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(1151, 15);
+            label1.Location = new Point(601, 15);
             label1.Name = "label1";
             label1.Size = new Size(55, 15);
             label1.TabIndex = 3;
@@ -328,7 +328,7 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "最速", "速度重視", "標準 (※推奨)", "品質重視", "最高品質" });
-            comboBox1.Location = new Point(1151, 37);
+            comboBox1.Location = new Point(601, 37);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(119, 23);
             comboBox1.TabIndex = 2;
@@ -336,7 +336,7 @@
             // button5
             // 
             button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button5.Location = new Point(1151, 656);
+            button5.Location = new Point(601, 456);
             button5.Name = "button5";
             button5.Size = new Size(195, 23);
             button5.TabIndex = 16;
@@ -346,9 +346,9 @@
             // progressBar1
             // 
             progressBar1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            progressBar1.Location = new Point(5, 656);
+            progressBar1.Location = new Point(5, 456);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(1139, 23);
+            progressBar1.Size = new Size(589, 23);
             progressBar1.TabIndex = 1;
             // 
             // listView1
@@ -361,7 +361,7 @@
             listView1.Location = new Point(5, 7);
             listView1.Name = "listView1";
             listView1.OwnerDraw = true;
-            listView1.Size = new Size(1139, 642);
+            listView1.Size = new Size(589, 442);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -419,7 +419,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1352, 687);
+            tabPage2.Size = new Size(1352, 685);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "デコード";
             // 
@@ -602,7 +602,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1384, 761);
+            ClientSize = new Size(834, 561);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
