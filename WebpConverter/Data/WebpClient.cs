@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,64 +24,82 @@ namespace WebpConverter.Data
 
         public async Task EncodeAsync(ImageFile[] imageFiles, EncodingOption option)
         {
-            if (IsRunning)
+            try
             {
-                return;
-            }
-
-            IsRunning = true;
-
-            if (IsParallel)
-            {
-                var i = 0;
-                await Parallel.ForEachAsync(imageFiles, async (x, token) =>
+                if (IsRunning)
                 {
-                    await EncodeAsync(x, option);
-                    Progressed?.Invoke(this, new WebpProgressedEventArgs(++i, imageFiles.Length, x));
-                });
-            }
-            else
-            {
-                foreach (var (x, i) in imageFiles.Select((x, i) => (x, i)))
+                    return;
+                }
+
+                IsRunning = true;
+
+                if (IsParallel)
                 {
-                    await EncodeAsync(x, option);
-                    Progressed?.Invoke(this, new WebpProgressedEventArgs(i + 1, imageFiles.Length, x));
+                    var i = 0;
+                    await Parallel.ForEachAsync(imageFiles, async (x, token) =>
+                    {
+                        await EncodeAsync(x, option);
+                        Progressed?.Invoke(this, new WebpProgressedEventArgs(++i, imageFiles.Length, x));
+                    });
+                }
+                else
+                {
+                    foreach (var (x, i) in imageFiles.Select((x, i) => (x, i)))
+                    {
+                        await EncodeAsync(x, option);
+                        Progressed?.Invoke(this, new WebpProgressedEventArgs(i + 1, imageFiles.Length, x));
+                    }
                 }
             }
-
-            Completed?.Invoke(this, new WebpEventArgs());
-            IsRunning = false;
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Completed?.Invoke(this, new WebpEventArgs());
+                IsRunning = false;
+            }
         }
 
         public async Task DecodeAsync(ImageFile[] imageFiles, DecodingOption option)
         {
-            if (IsRunning)
+            try
             {
-                return;
-            }
-
-            IsRunning = true;
-
-            if (IsParallel)
-            {
-                var i = 0;
-                await Parallel.ForEachAsync(imageFiles, async (x, token) =>
+                if (IsRunning)
                 {
-                    await DecodeAsync(x, option);
-                    Progressed?.Invoke(this, new WebpProgressedEventArgs(++i, imageFiles.Length, x));
-                });
-            }
-            else
-            {
-                foreach (var (x, i) in imageFiles.Select((x, i) => (x, i)))
+                    return;
+                }
+
+                IsRunning = true;
+
+                if (IsParallel)
                 {
-                    await DecodeAsync(x, option);
-                    Progressed?.Invoke(this, new WebpProgressedEventArgs(i + 1, imageFiles.Length, x));
+                    var i = 0;
+                    await Parallel.ForEachAsync(imageFiles, async (x, token) =>
+                    {
+                        await DecodeAsync(x, option);
+                        Progressed?.Invoke(this, new WebpProgressedEventArgs(++i, imageFiles.Length, x));
+                    });
+                }
+                else
+                {
+                    foreach (var (x, i) in imageFiles.Select((x, i) => (x, i)))
+                    {
+                        await DecodeAsync(x, option);
+                        Progressed?.Invoke(this, new WebpProgressedEventArgs(i + 1, imageFiles.Length, x));
+                    }
                 }
             }
-
-            Completed?.Invoke(this, new WebpEventArgs());
-            IsRunning = false;
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Completed?.Invoke(this, new WebpEventArgs());
+                IsRunning = false;
+            }
         }
 
         private async Task EncodeAsync(ImageFile imageFile, EncodingOption option)
